@@ -1,0 +1,59 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.membercontainer{
+position: relative;
+    top:0%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: stretch;
+    width: 800px;
+    border: 2px solid red;
+}
+.childmember{
+    height: 100px;
+    width: 700px;
+    margin: 20px;
+    background-color: aqua;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+}
+
+.profile{
+    margin: 0 20px;
+    flex: 1;
+}
+
+.picture{
+    background-color: yellow;
+        height: 75px;
+        width: 75px;
+        border-radius: 100%;
+        border: 2px solid peru;
+        flex-grow: 0;
+        flex-shrink: 0;
+}
+
+.criteraselectorbox{
+    height: 40px;
+    width: 100%;
+    border: darkgreen 2px solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    flex-wrap: wrap;
+}
+.criterachild{
+    font-size: 20px;
+    margin: 0 40px;
+    font-weight: normal;
+}

@@ -1,0 +1,94 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.info{
+    position: relative;
+    border: 2px solid red;
+    height: 100vh;
+    width: 800px;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+.movie{
+    display: inline-block;
+    border: 1px solid black;
+}
+.title{
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.middleflex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 30px;
+    /* gap: 20px; */
+}
+
+.movie{
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+.picture{
+    width: 150px;
+    height: 200px;
+}
+.description{
+    width: 500px;
+    height: 200px;
+}
+.ratings{
+    text-align: center;
+    height: 60px;
+}
+.leftsideflex{
+    display: flex;
+    flex-direction: column;
+}
+.bottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.middledescflex{
+    display: flex;
+    flex-direction: column;
+}
+.descflex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border: 2px solid red;
+}
+.desc{
+    cursor: pointer;
+    user-select: none;
+}
+.choice-desc{
+    width: 500px;
+    border: 2px solid red;
+}
+
+.output-desc{
+    width: 500px;
+    border: 2px solid red;
+    text-transform: capitalize;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.output-child{
+    border: 2px solid darkblue;
+}
+
+.reviews-section{
+    border: 2px solid red;
+
+    height: 200px;
+}

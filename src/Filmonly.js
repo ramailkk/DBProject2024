@@ -13,7 +13,6 @@ function Filmonly(){
 
     return(
         <>
-        <Headerbox></Headerbox>
 
         <div className='info film'> 
             <div className='movie title'>Bronx Tale</div>

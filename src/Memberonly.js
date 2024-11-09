@@ -13,7 +13,6 @@ function getgridMovies(array) {
 function Memberonly(){
     return(
     <>
-    <Headerbox></Headerbox>    
     <div className="memberinformation">
         <div className="children leftside">
         <div className="picture"></div>

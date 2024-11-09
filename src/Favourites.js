@@ -14,7 +14,6 @@ function Favourites(){
 
     return(
         <>
-        <Headerbox></Headerbox>
         <div className="criteraselectorbox">
             <div className="userheading">Favourite Movies of {username}</div>
             <div className="rightsideflex">

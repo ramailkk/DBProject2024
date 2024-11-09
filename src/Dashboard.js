@@ -13,9 +13,6 @@ function Dashboard() {
     }
 
     return(<>
-    <Headerbox>
-
-    </Headerbox>
     <div className='grid_container'>
         <h1 className='heading'>popular</h1>
         <hr></hr>

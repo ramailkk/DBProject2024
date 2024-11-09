@@ -14,7 +14,6 @@ function Watchlist(){
 
     return(
         <>
-        <Headerbox></Headerbox>
         <div className="criteraselectorbox">
             <div className="userheading">Movies {username} wants to watch</div>
             <div className="rightsideflex">

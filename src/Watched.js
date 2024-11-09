@@ -14,7 +14,6 @@ function Watched(){
 
     return(
         <>
-        <Headerbox></Headerbox>
         <div className="criteraselectorbox">
             <div className="userheading">Movies {username} has watched</div>
             <div className="rightsideflex">

@@ -1,11 +1,25 @@
-import './App.css';
-import Favourites from './Favourites';
-function App() {
-return(
-<>
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Headerbox from "./Headerbox.js";
+import Dashboard from "./Dashboard.js"
+import Films from "./Filmpage.js";
+import Members from "./Memberspage.js";
+import Memberspage from "./Memberspage.js";
+import Filmpage from "./Filmpage.js";
 
-</>
-)
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Headerbox />}>
+          <Route index element={<Dashboard />} />
+          <Route path="films" element={<Filmpage />} />
+          <Route path="members" element={<Memberspage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App;
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);

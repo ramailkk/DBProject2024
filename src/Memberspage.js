@@ -19,7 +19,6 @@ const memberlist = members.map((item) => <div className="childmember">
 function Memberspage(){
     return(
         <>
-        <Headerbox></Headerbox>
         <div className="criteraselectorbox">
             <h3 className="criterachild">sort by</h3>
             <div className="criterachild">Name</div>

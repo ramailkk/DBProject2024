@@ -4,7 +4,7 @@
     margin: 0;
 }
 
-.info{
+.film-information-container{
     position: relative;
     border: 2px solid red;
     height: 100vh;
@@ -12,17 +12,27 @@
     left: 50%;
     transform: translate(-50%, 0);
 }
-.movie{
+.film-information__element{
     display: inline-block;
     border: 1px solid black;
+    flex-shrink: 0;
+    flex-grow: 0;
 }
-.title{
+.film-information-title{
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
 }
+.film-information-picture{
+    width: 150px;
+    height: 200px;
+}
+.film-information-description{
+    width: 500px;
+    height: 200px;
+}
 
-.middleflex{
+.film-information-three-row-structure-flex{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -30,42 +40,30 @@
     /* gap: 20px; */
 }
 
-.movie{
-    flex-shrink: 0;
-    flex-grow: 0;
-}
-.picture{
-    width: 150px;
-    height: 200px;
-}
-.description{
-    width: 500px;
-    height: 200px;
-}
-.ratings{
+.film-information__ratings{
     text-align: center;
     height: 60px;
 }
-.leftsideflex{
+.film-information-left-flex{
     display: flex;
     flex-direction: column;
 }
-.bottom{
+.film-information-left-bottom-flex{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
-.middledescflex{
+.film-information-middle-flex{
     display: flex;
     flex-direction: column;
 }
-.descflex{
+.film-information-bottom-desc-flex{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     border: 2px solid red;
 }
-.desc{
+.bottom-desc__element{
     cursor: pointer;
     user-select: none;
 }
@@ -74,7 +72,7 @@
     border: 2px solid red;
 }
 
-.output-desc{
+.film-information-desc-category{
     width: 500px;
     border: 2px solid red;
     text-transform: capitalize;
@@ -83,12 +81,7 @@
     gap: 10px;
     flex-wrap: wrap;
 }
-.output-child{
+.film-information-desc-category__child{
     border: 2px solid darkblue;
 }
 
-.reviews-section{
-    border: 2px solid red;
-
-    height: 200px;
-}

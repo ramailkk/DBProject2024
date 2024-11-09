@@ -1,9 +1,13 @@
 *{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
     text-align: center;
+    text-decoration: none;
 }
 
 
-.memberinformation{
+.member-information-userbox{
     position: relative;
         top:0%;
         left: 50%;
@@ -15,12 +19,22 @@
         width: 100%;
         border: 2px solid red;
     }
-    .leftside{
+    .member-information-userbox-left{
         display: flex;
         flex-direction: row;
+        flex-wrap: nowrap;
         gap: 40px;
     }
-    .picture{
+    .member-information-userbox-right{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 40px;
+    }
+    .member-information-profile{
+        border: 2px solid peru;
+    }
+    .single-member-picture{
         background-color: yellow;
         height: 75px;
         width: 75px;
@@ -30,21 +44,7 @@
         flex-shrink: 0;
     }
 
-    .rightside{
-        display: flex;
-        flex-direction: row;
-        gap: 30px;
-    }
-    .profile{
-        flex-grow: 0;
-        flex-basis: 10vw;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        border: 2px solid peru;
-    }
-
-    .connectionbox{
+    .member-information-connectionbox{
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -53,14 +53,18 @@
         border: 2px solid slateblue;
         align-items: center;
     }
-    .link{
+    .member-information-connectionbox__element{
         text-align: center;
         text-transform: capitalize;
         text-decoration: none;
         color: black;
     }
+    .member-information-two-structure-row-flex{
+        display: flex;
+        flex-direction: row;
+    }
 
-    .grid_container{
+    .member-information-left-side-container{
         /* position: absolute;
         top: 50%;
         left: 50%;
@@ -74,7 +78,7 @@
         /* overflow: hidden; */
     }
     
-    .grid{
+    .member-information-left-side__grid{
         display: flex;
         flex-direction: row;
         justify-content: space-around;
@@ -85,29 +89,24 @@
         margin: 20px 0px;
         gap: 30px;
     }
-    .child{
+    .member-information-grid__element{
         height: 200px;
         width: 200px;
         
         /* margin: 0px 20px; */
         border: 1px green solid;
     }
-    .heading{
+    .member-information-left-side__heading{
         text-align: left;
         font-size: 20px;
         font-family: 'Times New Roman', Times, serif;
     }
 
-    hr{
+    .member-information-left-side__headingline{
         width: 500px;
     }
 
-    .sidebyside{
-        display: flex;
-        flex-direction: row;
-    }
-
-    .reviewcontainer{
+    .member-information-review-container{
         display: flex;
         flex-direction: column;
         border: 2px solid olive;
@@ -118,7 +117,7 @@
         align-items: center;
 
     }
-    .review{
+    .member-information-review__element{
         
         width: 500px;
         height: 200px;
@@ -129,37 +128,31 @@
         align-items: center;   
         
     }
-    .rev{
-        border: 2px solid darkcyan;
-        /* display: inline-block; */
-        /* float: left; */
-        
-    }
-
-
-    .poster{
+    .member-information-review-poster{
         width: 100px;
         height: 150px;
         flex-grow: 0;
         flex-shrink: 0;
+        border: 2px solid darkcyan;
     }
-    .comment{
+    .member-information-review-comment{
         margin-left: 40px;
         width: 400px;
         height: 100px;
         text-align: left;
+        border: 2px solid darkcyan;
     }
-    .rating{
-
+    .member-information-review-rating{
+        border: 2px solid darkcyan;
     }
 
     @media (max-width: 1000px) {
-        .sidebyside{
+        .member-information-two-structure-row-flex{
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-        .reviewcontainer{
+        .member-information-review-container{
             display: flex;
             flex-direction: column;
             border: 2px solid olive;

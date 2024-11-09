@@ -6,6 +6,9 @@ import Films from "./Filmpage.js";
 import Members from "./Memberspage.js";
 import Memberspage from "./Memberspage.js";
 import Filmpage from "./Filmpage.js";
+import Signup from "./Signup.js";
+import Memberonly from "./Memberonly.js";
+import Filmonly from "./Filmonly.js";
 
 export default function App() {
   return (
@@ -15,6 +18,8 @@ export default function App() {
           <Route index element={<Dashboard />} />
           <Route path="films" element={<Filmpage />} />
           <Route path="members" element={<Memberspage />} />
+          <Route path="memberonly" element={<Memberonly />} />
+          <Route path="signup" element={<Signup />} />
         </Route>
       </Routes>
     </BrowserRouter>

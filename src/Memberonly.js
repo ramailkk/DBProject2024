@@ -1,75 +1,80 @@
-import Headerbox from "./Headerbox";
 import "./Memberonly.css"
 
 const popularMovies = Array(4).fill(0); // Replace with actual data if available
 const newMovies = Array(4).fill(0); // Replace with actual data if available
 
+
 function getgridMovies(array) {
     return array.map((_, index) => (
-        <div key={index} className="child">Movie {index + 1}</div>
+        <div key={index} className="member-information-grid__element">Movie {index + 1}</div>
+    ));
+}
+
+const recentReviews = Array(3).fill("");
+// index.picture
+// index.description
+// index.review
+
+function getrecentReviews(array) {
+    return array.map((_, index) => (
+        <div key={index} className="member-information-review__element">
+        <div className="member-information-review-poster"></div>
+        {/* <div className="rev rating">4/5</div> */}
+        <div className="member-information-review-comment">This movie sucks big dodo ass like holy shit</div>
+    </div>
     ));
 }
 
 function Memberonly(){
     return(
     <>
-    <div className="memberinformation">
-        <div className="children leftside">
-        <div className="picture"></div>
-        <div className="profile name">Name</div>
+
+    {/* Topmost bar with user information */}
+    <div className="member-information-userbox">
+        <div className="member-information-userbox-left">
+        <div className="member-information-profile single-member-picture"></div>
+        <div className="member-information-profile single-member-name">Name</div>
         </div>
-        <div className="children rightside">
-        <div className="profile watched">0123<br></br>Films</div>
-        <div className="profile reviewed">312<br></br>Reviews</div>
+        <div className="member-information-userbox-right">
+        <div className="member-information-profile single-member-watchedcount">0123<br></br>Films</div>
+        <div className="member-information-profile single-member-reviewcount">312<br></br>Reviews</div>
         </div>
     </div>
 
 
-
-
-    <div className="connectionbox">
-        <a href="google.com" className="link user_profile">Profile</a>
-        <a href="google.com" className="link watched">Watched</a>
-        <a href="google.com" className="link watchlist">Watchlist</a>
-        <a href="google.com" className="link lists">Lists</a>
-        <a href="google.com" className="link reviews">Reviews</a>
+{/* Below the top bar which contains links to other user specific pages */}
+    <div className="member-information-connectionbox">
+        <a href="google.com" className="member-information-connectionbox__element user_profile">Profile</a>
+        <a href="google.com" className="member-information-connectionbox__element watched">Watched</a>
+        <a href="google.com" className="member-information-connectionbox__element watchlist">Watchlist</a>
+        <a href="google.com" className="member-information-connectionbox__element lists">Lists</a>
+        <a href="google.com" className="member-information-connectionbox__element reviews">Reviews</a>
     </div>
+
+
+    {/* two-structure-row-flex which seperates movies and reviews of a user */}
+    <div className="member-information-two-structure-row-flex">
+
+
+    {/*left side of the flex: movie-portion */}
     
-   
-   
-    <div className="sidebyside">
+    <div className='member-information-left-side-container'>
+    
+    {/* Favourite movies of a user */}
+    <h1 className='member-information-left-side__heading'>Favourites</h1>
+    <hr className="member-information-left-side__headingline"></hr>
+    <div className='member-information-left-side__grid single-popular-grid'>{getgridMovies(popularMovies)}</div>
 
-    <div className='grid_container'>
-    <h1 className='heading'>Favourites</h1>
-    <hr></hr>
-    <div className='grid popular_movie'>{getgridMovies(popularMovies)}</div>
-    <h1 className='heading'>Recently Watched</h1>
-    <hr></hr>
-    <div className='grid new_movie'>{getgridMovies(newMovies)}</div>
+    {/* Recent movies of a user */}
+    <h1 className='member-information-left-side__heading'>Recently Watched</h1>
+    <hr className="member-information-left-side__headingline"></hr>
+    <div className='member-information-left-side__grid single-recent-grid'>{getgridMovies(newMovies)}</div>
+    
     </div>
 
-
-
-    <div className="reviewcontainer">
-        <h1 className="heading">Recent Reviews</h1>
-        <div className="review one">
-            <div className="rev poster"></div>
-            {/* <div className="rev rating">4/5</div> */}
-            <div className="rev comment">This movie sucks big dodo ass like holy shit</div>
-            
-    </div>
-    <div className="review one">
-            <div className="rev poster"></div>
-            {/* <div className="rev rating">4/5</div> */}
-            <div className="rev comment">This movie sucks big dodo ass like holy shit</div>
-            
-    </div>
-    <div className="review one">
-            <div className="rev poster"></div>
-            {/* <div className="rev rating">4/5</div> */}
-            <div className="rev comment">This movie sucks big dodo ass like holy shit</div>
-            
-    </div>
+    {/* right side of the flex: review-portion */}
+    <div className="member-information-review-container">
+        {getrecentReviews(recentReviews)}
     </div>
     </div>
 

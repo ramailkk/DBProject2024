@@ -2,10 +2,13 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    text-decoration: none;
+    text-align: center;
+    text-transform: capitalize;
 }
 
-.filmcontainer{
-position: relative;
+.film-page-container{
+    position: relative;
     top:0%;
     left: 50%;
     transform: translate(-50%, 0%);
@@ -17,27 +20,24 @@ position: relative;
     width: 800px;
     border: 2px solid red;
 }
-.childfilm{
+.film-page__child{
     height: 200px;
     width: 100px;
     margin: 20px;
     background-color: aqua;
 }
-.criteraselectorbox{
+.film-page-criteria-selectorbox{
     height: 40px;
     width: 100%;
     border: darkgreen 2px solid;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: right;
     flex-wrap: nowrap;
+    align-items: center;
 }
-.criteriachild{
+.film-page-criteria-selectorbox__element{
     font-size: 20px;
     margin: 0 40px;
     font-weight: normal;
-}
-.rightsideflex{
-    display: flex;
-    flex-direction: row;
 }

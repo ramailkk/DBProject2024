@@ -4,10 +4,9 @@
     padding: 0;
     text-align: center;
     text-transform: capitalize;
-
 }
 
-.grid_container{
+.dashboard-grid{
     /* position: absolute;
     top: 50%;
     left: 50%;
@@ -22,7 +21,7 @@
     border: 2px solid red;
 }
 
-.grid{
+.dashboard-grid-category{
     display: flex;
     flex-direction: row;
     justify-content: left;
@@ -31,18 +30,18 @@
     /* border: 2px solid black; */
     margin: 20px 0px;
 }
-.child{
+.dashboard-grid__category-child{
     height: 200px;
     width: 200px;
     
     margin: 0px 20px;
     border: 1px green solid;
 }
-.heading{
+.dashboard-grid-heading{
     text-align: left;
     font-size: 20px;
     font-family: 'Times New Roman', Times, serif;
 }
-hr{
+.dashboard-grid-headingline{
     width: 500px;
 }

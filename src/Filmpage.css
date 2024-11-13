@@ -3,10 +3,9 @@
     padding: 0;
     margin: 0;
     text-decoration: none;
-    text-align: center;
 }
 .film-page-outer-container{
-    border: 2px solid rebeccapurple;
+    border: 2px solid red;
     width: 800px;
     position: relative;
     top:0%;
@@ -34,34 +33,40 @@
     width: 100px;
     /* margin: 20px; */
     /* background-color: aqua; */
-    border: 2px solid green;
+    border: 2px solid red;
 }
 .film-page-criteria-selectorbox{
-    height: 40px;
+    height: 50px;
     width: 100%;
-    border: darkgreen 2px solid;
+    border: red 2px solid;
     display: flex;
     flex-direction: row;
-    justify-content: right;
+    justify-content: center;
     flex-wrap: nowrap;
     align-items: center;
+    gap: 20px;
 }
 
-
-
 .film-page-criteria-selectorbox__element{
-    font-size: 20px;
-    margin: 0 40px;
-    font-weight: normal;
-    position: relative;
-    display: inline-block;
+    /* border: 2px solid blueviolet; */
+    width: auto;
+    
+}
+
+.film-page-search{
+   
+}
+.film-page-search-bar{
+    
+}
+.film-page-search-button{
+    /* width: ; */
 }
 .film-page-criteria-dropdown__button{
     width: 100px;
     height: 20px;
     background-color: #04AA6D;
     color: white;
-    padding: 16px;
     font-size: 16px;
     border: none;
 
@@ -70,16 +75,18 @@
     display: none;
     position: absolute;
     background-color: #f1f1f1;
-    min-width: 160px;
+    min-width: 100px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
 .film-page-criteria-dropdown__element{
     color: black;
-    padding: 12px 16px;
+    padding: 0px 0px;
     text-decoration: none;
     display: block;
     cursor: pointer;
+    font-size: auto;
+
 }
 .film-age-criteria-dropdown .film-page-criteria-dropdown__element{
     background-color: #ddd;

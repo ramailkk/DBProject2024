@@ -8,12 +8,11 @@ function Headerbox(){
     // login
     // logging
     // logout
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&display=swap" rel="stylesheet"></link>
     return(    
         
         <>
         <div className="headerbox">
-        <div className="headerboxcomponent logo">LOGO</div>
+        <Link Link to="/" className="headerboxcomponent logo" onClick={() => tab === "logging" ? setTab("logout"): ""}>MovieMangement</Link>
         {logRender(tab,setTab)}
         </div>
 
@@ -35,7 +34,6 @@ function logRender(tab, setTab){
 function logOut(tab, setTab){
     return(
     <div className="header-links">
-        <Link to="/" className="headerboxcomponent">Home</Link>
         <Link to="/films" className="headerboxcomponent">Films</Link>
         <Link to="/members" className="headerboxcomponent">Members</Link>
         <div className="headerboxcomponent" onClick={() => setTab("logging")}>
@@ -72,7 +70,6 @@ function Logging(tab,setTab){
         return(
             <>
         <div className="header-links">
-        <Link to="/" className="headerboxcomponent">Home</Link>
         <Link to="memberonly" className="headerboxcomponent">insertName</Link>
         <Link to="/films" className="headerboxcomponent">Films</Link>
         <Link to="/members" className="headerboxcomponent">Members</Link>

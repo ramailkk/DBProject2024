@@ -36,8 +36,8 @@ function Memberonly(){
         <div className="member-information-profile single-member-name">Name</div>
         </div>
         <div className="member-information-userbox-right">
-        <div className="member-information-profile single-member-watchedcount">0123<br></br>Films</div>
-        <div className="member-information-profile single-member-reviewcount">312<br></br>Reviews</div>
+        <div className="member-information-profile single-member-watchedcount">0123</div>
+        <div className="member-information-profile single-member-reviewcount">312</div>
         </div>
     </div>
 

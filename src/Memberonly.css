@@ -18,21 +18,25 @@
         justify-content: space-around;
         width: 100%;
         border: 2px solid red;
+        /* align-items: center; */
     }
     .member-information-userbox-left{
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
         gap: 40px;
+        align-items: center;
     }
     .member-information-userbox-right{
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
         gap: 40px;
+        align-items: center;
     }
     .member-information-profile{
         border: 2px solid peru;
+        cursor: pointer;
     }
     .single-member-picture{
         background-color: yellow;
@@ -95,6 +99,7 @@
         
         /* margin: 0px 20px; */
         border: 1px green solid;
+        cursor: pointer;
     }
     .member-information-left-side__heading{
         text-align: left;

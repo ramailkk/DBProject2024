@@ -9,7 +9,6 @@ import Filmpage from "./Filmpage.js";
 import Signup from "./Signup.js";
 import Memberonly from "./Memberonly.js";
 import Filmonly from "./Filmonly.js";
-
 export default function App() {
   return (
     <BrowserRouter>

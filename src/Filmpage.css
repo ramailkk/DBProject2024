@@ -4,7 +4,14 @@
     margin: 0;
     text-decoration: none;
     text-align: center;
-    text-transform: capitalize;
+}
+.film-page-outer-container{
+    border: 2px solid rebeccapurple;
+    width: 800px;
+    position: relative;
+    top:0%;
+    left: 50%;
+    transform: translate(-50%, 0%);
 }
 
 .film-page-container{
@@ -16,15 +23,18 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
     width: 800px;
-    border: 2px solid red;
+    margin-top: 25px;
+    /* border: 2px solid red; */
+    gap: 10px;
 }
 .film-page__child{
-    height: 200px;
+    /* margin-top: 40px; */
+    height: 170px;
     width: 100px;
-    margin: 20px;
-    background-color: aqua;
+    /* margin: 20px; */
+    /* background-color: aqua; */
+    border: 2px solid green;
 }
 .film-page-criteria-selectorbox{
     height: 40px;
@@ -36,8 +46,51 @@
     flex-wrap: nowrap;
     align-items: center;
 }
+
+
+
 .film-page-criteria-selectorbox__element{
     font-size: 20px;
     margin: 0 40px;
     font-weight: normal;
+    position: relative;
+    display: inline-block;
+}
+.film-page-criteria-dropdown__button{
+    width: 100px;
+    height: 20px;
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+
+}
+.film-age-criteria-dropdown{
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.film-page-criteria-dropdown__element{
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+}
+.film-age-criteria-dropdown .film-page-criteria-dropdown__element{
+    background-color: #ddd;
+}
+.film-page-criteria-selectorbox__element:hover .film-age-criteria-dropdown{
+    display: block;
+}
+.film-page-criteria-selectorbox__element:hover .film-page-criteria-dropdown__button{
+    background-color: #3e8e41;
+}
+
+.film-page-criteria-dropdown__element:hover {
+    background-color: red;
 }

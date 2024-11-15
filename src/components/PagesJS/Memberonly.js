@@ -1,4 +1,5 @@
-import "./Memberonly.css"
+import "../StyleCSS/Memberonly.css";
+
 
 const popularMovies = Array(4).fill(0); // Replace with actual data if available
 const newMovies = Array(4).fill(0); // Replace with actual data if available

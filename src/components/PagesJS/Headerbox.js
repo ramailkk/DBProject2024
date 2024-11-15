@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Headerbox.css"
+import "../StyleCSS/Headerbox.css";
 import { Outlet, Link } from "react-router-dom";
 function Headerbox(){
 

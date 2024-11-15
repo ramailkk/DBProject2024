@@ -1,14 +1,13 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Headerbox from "./Headerbox.js";
-import Dashboard from "./Dashboard.js"
-import Films from "./Filmpage.js";
-import Members from "./Memberspage.js";
-import Memberspage from "./Memberspage.js";
-import Filmpage from "./Filmpage.js";
-import Signup from "./Signup.js";
-import Memberonly from "./Memberonly.js";
-import Filmonly from "./Filmonly.js";
+import Headerbox from "../PagesJS/Headerbox.js";
+import Dashboard from "../PagesJS/Dashboard.js";
+import Memberspage from "../PagesJS/Memberspage.js";
+import Filmpage from "../PagesJS/Filmpage.js";
+import Signup from "../PagesJS/Signup.js";
+import Memberonly from "../PagesJS/Memberonly.js";
+import Filmonly from "../PagesJS/Filmonly.js";
+
 export default function App() {
   return (
     <BrowserRouter>

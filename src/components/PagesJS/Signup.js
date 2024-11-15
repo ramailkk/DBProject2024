@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Signup.css";
+import "../StyleCSS/Signup.css";
 import { Outlet, Link } from "react-router-dom";
 
 

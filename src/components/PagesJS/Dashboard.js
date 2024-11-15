@@ -1,4 +1,4 @@
-import './Dashboard.css';
+import '../StyleCSS/Dashboard.css';
 
 function Dashboard() {
 

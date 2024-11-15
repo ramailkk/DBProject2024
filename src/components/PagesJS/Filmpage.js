@@ -1,4 +1,4 @@
-import "./Filmpage.css"
+import "../StyleCSS/Filmpage.css";
 import {useState } from "react";
 import { Outlet,Link } from "react-router-dom";
 const films = Array(33).fill();

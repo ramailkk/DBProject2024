@@ -1,8 +1,8 @@
-import "./Memberspage.css"
-import eyeImage from "./eye2.png"
-import listImage from "./windows.png"
-import reviewImage from "./review.png"
-import sampleAvatar from "./avatar.png"
+import "../StyleCSS/Memberspage.css";
+import eyeImage from "../Styleicons/eye2.png"
+import listImage from "../Styleicons/windows.png"
+import reviewImage from "../Styleicons/review.png"
+import sampleAvatar from "../Styleicons/avatar.png"
 // const template = { name: "name", picture: 0, watched: 321, lists: 412, reviews:853 };
 
 // const members = Array.from({ length: 30 }, () => ({ ...template }));

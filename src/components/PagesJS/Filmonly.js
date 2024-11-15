@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import "../StyleCSS/Filmonly.css"
 const arrays = {
     directors: Array(3).fill("jane doe"), 
     actors: Array(16).fill("john smith"),

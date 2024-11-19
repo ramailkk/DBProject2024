@@ -128,3 +128,58 @@ INSERT INTO Movie (MovieID, Title, ReleaseDate, Description) VALUES
 
 COMMIT;
 
+INSERT INTO Genre (GenreID, GenreType) VALUES (1, 'Sci-Fi');
+INSERT INTO Genre (GenreID, GenreType) VALUES (2, 'Drama');
+INSERT INTO Genre (GenreID, GenreType) VALUES (3, 'Action');
+INSERT INTO Genre (GenreID, GenreType) VALUES (4, 'Adventure');
+INSERT INTO Genre (GenreID, GenreType) VALUES (5, 'Romance');
+INSERT INTO Genre (GenreID, GenreType) VALUES (6, 'Crime');
+INSERT INTO Genre (GenreID, GenreType) VALUES (7, 'Thriller');
+INSERT INTO Genre (GenreID, GenreType) VALUES (8, 'Fantasy');
+INSERT INTO Genre (GenreID, GenreType) VALUES (9, 'Comedy');
+INSERT INTO Genre (GenreID, GenreType) VALUES (10, 'Horror');
+
+COMMIT;
+
+-- Inception (Sci-Fi, Thriller)
+INSERT INTO MovieGenre (MovieID, GenreID) VALUES (1, 1); -- Sci-Fi
+INSERT INTO MovieGenre (MovieID, GenreID) VALUES (1, 7); -- Thriller
+
+-- The Matrix (Sci-Fi, Action)
+INSERT INTO MovieGenre (MovieID, GenreID) VALUES (2, 1); -- Sci-Fi
+INSERT INTO MovieGenre (MovieID, GenreID) VALUES (2, 3); -- Action
+
+-- The Shawshank Redemption (Drama)
+INSERT INTO MovieGenre (MovieID, GenreID) VALUES (3, 2); -- Drama
+
+-- The Godfather (Crime, Drama)
+INSERT INTO MovieGenre (MovieID, GenreID) VALUES (4, 6); -- Crime
+INSERT INTO MovieGenre (MovieID, GenreID) VALUES (4, 2); -- Drama
+
+-- Titanic (Romance, Drama)
+INSERT INTO MovieGenre (MovieID, GenreID) VALUES (5, 5); -- Romance
+INSERT INTO MovieGenre (MovieID, GenreID) VALUES (5, 2); -- Drama
+
+-- Avengers: Endgame (Action, Sci-Fi, Adventure)
+INSERT INTO MovieGenre (MovieID, GenreID) VALUES (6, 3); -- Action
+INSERT INTO MovieGenre (MovieID, GenreID) VALUES (6, 1); -- Sci-Fi
+INSERT INTO MovieGenre (MovieID, GenreID) VALUES (6, 4); -- Adventure
+
+-- Jurassic Park (Adventure, Sci-Fi)
+INSERT INTO MovieGenre (MovieID, GenreID) VALUES (7, 4); -- Adventure
+INSERT INTO MovieGenre (MovieID, GenreID) VALUES (7, 1); -- Sci-Fi
+
+-- The Dark Knight (Action, Crime, Thriller)
+INSERT INTO MovieGenre (MovieID, GenreID) VALUES (8, 3); -- Action
+INSERT INTO MovieGenre (MovieID, GenreID) VALUES (8, 6); -- Crime
+INSERT INTO MovieGenre (MovieID, GenreID) VALUES (8, 7); -- Thriller
+
+-- Forrest Gump (Drama, Romance)
+INSERT INTO MovieGenre (MovieID, GenreID) VALUES (9, 2); -- Drama
+INSERT INTO MovieGenre (MovieID, GenreID) VALUES (9, 5); -- Romance
+
+-- Pulp Fiction (Crime, Drama)
+INSERT INTO MovieGenre (MovieID, GenreID) VALUES (10, 6); -- Crime
+INSERT INTO MovieGenre (MovieID, GenreID) VALUES (10, 2); -- Drama
+
+COMMIT;

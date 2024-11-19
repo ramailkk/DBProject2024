@@ -54,10 +54,34 @@ async function getMoviesByGenre(genreID) {
     }
   }
 }
+async function listMoviesByDecade(decade) {
+  let conn;
+  try {
+    conn = await oracledb.getConnection();
+    // Get the range for the given decade
+    const startYear = parseInt(decade, 10);
+    const endYear = startYear + 9;
 
+    const query = `
+      SELECT * 
+      FROM Movie
+      WHERE EXTRACT(YEAR FROM ReleaseDate) BETWEEN :startYear AND :endYear
+    `;
+
+    const result = await conn.execute(query, { startYear, endYear });
+    return result.rows;
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) {
+      await conn.close();
+    }
+  }
+}
 
 module.exports = {
   listAllmovies,
   listAllgenres,
   getMoviesByGenre,
+  listMoviesByDecade,
 };

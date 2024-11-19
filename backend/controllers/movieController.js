@@ -5,6 +5,7 @@ const {
   listAllmovies,
   listAllgenres,
   getMoviesByGenre,
+  listMoviesByDecade
 } = require("../models/movieModel");
 
 const db = require("../config/db");
@@ -52,9 +53,28 @@ async function fetchMoviesByGenre(req, res) {
     res.status(500).json({ message: "Error fetching movies by genre", error: err });
   }
 }
+/**
+ * Get movies by decade
+ * @param req - Request object
+ * @param res - Response object
+ */
+async function getMoviesByDecade(req, res) {
+  try {
+    const { decade } = req.query; // Get the decade from query parameters
+    if (!decade || isNaN(decade)) {
+      return res.status(400).json({ message: "Invalid or missing 'decade' parameter" });
+    }
+
+    const movies = await listMoviesByDecade(decade);
+    res.json({ data: movies });
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching movies by decade", error: err });
+  }
+}
 
 module.exports = {
   fetchMoviesByGenre,
   getAllmovies,
   getAllgenres,
+  getMoviesByDecade,
   };

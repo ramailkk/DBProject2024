@@ -79,9 +79,65 @@ async function listMoviesByDecade(decade) {
   }
 }
 
+
+
+
+
+
+/**
+ * Fetch all movies from the database.
+ * 
+ * @param {string} movieName - If provided, can filter the movies by name, otherwise returns all.
+ * @returns {Promise<Array>} - A promise that resolves to an array of movies.
+ */
+
+
+async function getMoviesByName(name) {
+  let conn;
+  try {
+    conn = await oracledb.getConnection();
+    console.log('Connected to Oracle database');
+
+    // Ensure the name is trimmed of excess spaces
+    const trimmedName = name.trim();
+
+    // SQL query to search movies by name, allowing partial matches anywhere in the title
+    const result = await conn.execute(
+      `SELECT * 
+       FROM Movie 
+       WHERE UPPER(Title) LIKE UPPER('%' || :name || '%') 
+       ORDER BY 
+         CASE 
+           WHEN UPPER(Title) = UPPER(:name) THEN 1   -- Exact match first
+           WHEN UPPER(Title) LIKE UPPER(:name || '%') THEN 2  -- Starts with name
+           WHEN UPPER(Title) LIKE UPPER('%' || :name || '%') THEN 3  -- Contains name anywhere
+           ELSE 4
+         END`,
+      {
+        name: `${trimmedName}%`  // Pass the parameter for wildcards
+      }
+    );
+
+    // Ensure that result.rows is not null or empty
+    if (!result.rows || result.rows.length === 0) {
+      return { message: "No movies found for the given name." };
+    }
+
+    return result.rows;  // Return the found movies
+  } catch (err) {
+    console.error('Error in getMoviesByName:', err);
+    throw err;  // Propagate error
+  } finally {
+    if (conn) {
+      await conn.close();
+    }
+  }
+}
+
 module.exports = {
   listAllmovies,
   listAllgenres,
   getMoviesByGenre,
   listMoviesByDecade,
+  getMoviesByName
 };

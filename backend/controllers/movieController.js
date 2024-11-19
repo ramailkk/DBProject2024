@@ -1,3 +1,5 @@
+const Fuse = require("fuse.js");
+
 /**
  * Controller for movie-related operations
  */
@@ -5,7 +7,8 @@ const {
   listAllmovies,
   listAllgenres,
   getMoviesByGenre,
-  listMoviesByDecade
+  listMoviesByDecade,
+  getMoviesByName
 } = require("../models/movieModel");
 
 const db = require("../config/db");
@@ -72,9 +75,44 @@ async function getMoviesByDecade(req, res) {
   }
 }
 
+
+
+
+
+
+
+/**
+ * Controller function to get movies by fuzzy name search
+ * @param req - Request object
+ * @param res - Response object
+ */
+async function getMoviesByNameHandler(req, res) {
+  try {
+    // Get the 'name' query parameter from the request
+    const { name } = req.query;
+    
+    if (!name) {
+      return res.status(400).json({ message: 'Movie name query parameter is required' });
+    }
+
+    // Call the function to get movies by name
+    const movies = await getMoviesByName(name);
+
+    if (movies.length === 0) {
+      return res.status(404).json({ message: 'No movies found' });
+    }
+
+    res.json({ data: movies });
+  } catch (error) {
+    console.error('Error in getMoviesByNameHandler:', error);
+    res.status(500).json({ message: 'Error fetching movies', error: error.message || error });
+  }
+}
+
 module.exports = {
   fetchMoviesByGenre,
   getAllmovies,
   getAllgenres,
   getMoviesByDecade,
+  getMoviesByNameHandler
   };

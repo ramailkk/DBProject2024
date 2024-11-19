@@ -7,6 +7,6 @@ router.get("/movies", movieController.getAllmovies);
 router.get("/genres", movieController.getAllgenres);
 router.get("/moviegenre",movieController.fetchMoviesByGenre);
 router.get("/moviedecade", movieController.getMoviesByDecade);
-
-
+router.get("/moviename", movieController.getMoviesByNameHandler);
+// http://localhost:3001/api//moviename?name=dark
 module.exports = router;

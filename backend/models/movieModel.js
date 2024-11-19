@@ -134,10 +134,44 @@ async function getMoviesByName(name) {
   }
 }
 
+/**
+ * Get movies based on the rating range or highest/lowest rated movies.
+ * @param {number} rating - The rating or special value (6 for highest, 0 for lowest).
+ * @returns {Array} - List of movies matching the rating range or highest/lowest ratings.
+ */
+async function listMoviesByRatingRange(rating) {
+  try {
+    let query = '';
+
+    if (rating === 6) {
+      // Fetch highest rated movies
+      query = `SELECT * FROM movie ORDER BY AVERAGERATING DESC`;
+    } else if (rating === 0) {
+      // Fetch lowest rated movies
+      query = `SELECT * FROM movie ORDER BY AVERAGERATING ASC`;
+    } else {
+      // Rating ranges (e.g., 5 -> 5-4, 4 -> 4-3, etc.)
+      const rangeStart = rating;
+      const rangeEnd = rating - 1;
+      query = `SELECT * FROM movie WHERE AVERAGERATING <= ${rangeStart} AND AVERAGERATING > ${rangeEnd} ORDER BY AVERAGERATING DESC`;
+    }
+    let conn;
+    conn = await oracledb.getConnection();
+    console.log('Connected to Oracle database');
+
+    const result = await conn.execute(query);
+    return result.rows;
+  } catch (error) {
+    throw new Error('Error fetching movies by rating range: ' + error.message);
+  }
+}
+
+
 module.exports = {
   listAllmovies,
   listAllgenres,
   getMoviesByGenre,
   listMoviesByDecade,
-  getMoviesByName
+  getMoviesByName,
+  listMoviesByRatingRange
 };

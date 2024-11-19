@@ -1,5 +1,3 @@
-const Fuse = require("fuse.js");
-
 /**
  * Controller for movie-related operations
  */
@@ -8,10 +6,11 @@ const {
   listAllgenres,
   getMoviesByGenre,
   listMoviesByDecade,
-  getMoviesByName
+  getMoviesByName,
+  listMoviesByRatingRange
 } = require("../models/movieModel");
 
-const db = require("../config/db");
+// const db = require("../config/db");
 
 /**
  * Get all employees
@@ -109,10 +108,37 @@ async function getMoviesByNameHandler(req, res) {
   }
 }
 
+
+//RATINGS
+/**
+ * Controller function to handle the fetching of movies by rating range.
+ * @param {object} req - The request object containing query parameters.
+ * @param {object} res - The response object used to send the results.
+ */
+async function getMoviesByRatingRange(req, res) {
+  const { rating } = req.query;
+
+  if (!rating) {
+    return res.status(400).json({ message: 'Rating parameter is required' });
+  }
+
+  try {
+    // Call the model function to fetch movies by rating range
+    const movies = await listMoviesByRatingRange(Number(rating));
+
+    return res.status(200).json({ movies });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Error fetching movies by rating range', error: error.message });
+  }
+}
+
+
 module.exports = {
   fetchMoviesByGenre,
   getAllmovies,
   getAllgenres,
   getMoviesByDecade,
-  getMoviesByNameHandler
+  getMoviesByNameHandler,
+  getMoviesByRatingRange
   };

@@ -183,3 +183,87 @@ INSERT INTO MovieGenre (MovieID, GenreID) VALUES (10, 6); -- Crime
 INSERT INTO MovieGenre (MovieID, GenreID) VALUES (10, 2); -- Drama
 
 COMMIT;
+
+UPDATE Movie 
+SET AverageRating = 4.5
+WHERE MovieID = 1;  -- Inception
+
+UPDATE Movie 
+SET AverageRating = 3.8
+WHERE MovieID = 2;  -- The Matrix
+
+UPDATE Movie 
+SET AverageRating = 4.2
+WHERE MovieID = 3;  -- The Shawshank Redemption
+
+UPDATE Movie 
+SET AverageRating = 4.0
+WHERE MovieID = 4;  -- The Godfather
+
+UPDATE Movie 
+SET AverageRating = 3.6
+WHERE MovieID = 5;  -- Titanic
+
+UPDATE Movie 
+SET AverageRating = 4.3
+WHERE MovieID = 6;  -- Avengers: Endgame
+
+UPDATE Movie 
+SET AverageRating = 3.9
+WHERE MovieID = 7;  -- Jurassic Park
+
+UPDATE Movie 
+SET AverageRating = 4.1
+WHERE MovieID = 8;  -- The Dark Knight
+
+UPDATE Movie 
+SET AverageRating = 3.7
+WHERE MovieID = 9;  -- Forrest Gump
+
+UPDATE Movie 
+SET AverageRating = 4.4
+WHERE MovieID = 10;  -- Pulp Fiction
+
+COMMIT;
+
+-- Insert statement for user 1
+INSERT INTO MovieUser (UserID, UserName, Email, Password, JoinDate) 
+VALUES (1, 'JohnDoe', 'johndoe@example.com', 'password123', TO_DATE('2022-01-15', 'YYYY-MM-DD'));
+
+-- Insert statement for user 2
+INSERT INTO MovieUser (UserID, UserName, Email, Password, JoinDate) 
+VALUES (2, 'JaneSmith', 'janesmith@example.com', 'mypassword', TO_DATE('2021-08-10', 'YYYY-MM-DD'));
+
+-- Insert statement for user 3
+INSERT INTO MovieUser (UserID, UserName, Email, Password, JoinDate) 
+VALUES (3, 'MikeJohnson', 'mikejohnson@example.com', 'securepass', TO_DATE('2023-05-22', 'YYYY-MM-DD'));
+
+-- Insert statement for user 4
+INSERT INTO MovieUser (UserID, UserName, Email, Password, JoinDate) 
+VALUES (4, 'EmilyDavis', 'emilydavis@example.com', '1234password', TO_DATE('2020-11-05', 'YYYY-MM-DD'));
+
+-- Insert statement for user 5
+INSERT INTO MovieUser (UserID, UserName, Email, Password, JoinDate) 
+VALUES (5, 'ChrisBrown', 'chrisbrown@example.com', 'chris2020', TO_DATE('2019-07-15', 'YYYY-MM-DD'));
+
+-- Insert statement for user 6
+INSERT INTO MovieUser (UserID, UserName, Email, Password, JoinDate) 
+VALUES (6, 'OliviaMartinez', 'oliviamartinez@example.com', 'password567', TO_DATE('2021-03-10', 'YYYY-MM-DD'));
+
+-- Insert statement for user 7
+INSERT INTO MovieUser (UserID, UserName, Email, Password, JoinDate) 
+VALUES (7, 'DavidWilson', 'davidwilson@example.com', 'davidsmith', TO_DATE('2022-09-30', 'YYYY-MM-DD'));
+
+-- Insert statement for user 8
+INSERT INTO MovieUser (UserID, UserName, Email, Password, JoinDate) 
+VALUES (8, 'SophiaGarcia', 'sophiagarcia@example.com', 'sophia2020', TO_DATE('2018-12-25', 'YYYY-MM-DD'));
+
+-- Insert statement for user 9
+INSERT INTO MovieUser (UserID, UserName, Email, Password, JoinDate) 
+VALUES (9, 'LiamMartinez', 'liammartinez@example.com', 'liam2022', TO_DATE('2020-06-17', 'YYYY-MM-DD'));
+
+-- Insert statement for user 10
+INSERT INTO MovieUser (UserID, UserName, Email, Password, JoinDate) 
+VALUES (10, 'AvaRodriguez', 'avarodriguez@example.com', 'avapassword', TO_DATE('2017-11-04', 'YYYY-MM-DD'));
+
+COMMIT;

@@ -1,20 +1,55 @@
-import { useState } from 'react';
-import "../StyleCSS/Filmonly.css"
-const arrays = {
-    directors: Array(3).fill("jane doe"), 
-    actors: Array(16).fill("john smith"),
-    genres: Array(5).fill("nothing")
-};
+import { useState , useEffect} from 'react';
+import '../StyleCSS/Filmonly.css'
+import { useParams } from 'react-router-dom';
+import { useFilm } from './FilmContext.js';
+
+
 
 function Filmonly(){ 
+
     
+
+    const { selectedFilm } = useFilm();
+
     const [choice_desc, setChoice_desc] = useState('actors');
+
+
+
+
+    const [genres,setGenres] = useState([]);
+    const [actors, setActors] = useState([]);
+    const [directors, setDirectors] = useState([]);
+    
+    fetchDescriptionOption('http://localhost:3001/api/filmpagegenres?', `id=${selectedFilm[0]}`, setGenres)
+    fetchDescriptionOption('http://localhost:3001/api/filmpageactors?', `id=${selectedFilm[0]}`, setActors)
+    fetchDescriptionOption('http://localhost:3001/api/filmpagedirectors?', `id=${selectedFilm[0]}`, setDirectors)
+    const arrays = {
+        directors,
+        actors,
+        genres
+    };
+
+    function fetchDescriptionOption(get_api, critera, setArray){
+        let customApi = get_api + "" + critera;
+        fetch(customApi, {
+        method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data.data);
+                setArray(data.data);
+            })
+            .catch((error) => console.error("Error fetching search results:", error));
+    }
 
     return(
         <>
         <div className='film-information-container'> 
             
-            <div className='film-information__element film-information-title'>Bronx Tale</div>
+            <div className='film-information__element film-information-title'>{selectedFilm[1]}</div>
 
 
             {/* 3 Part Structure Row */}
@@ -22,7 +57,7 @@ function Filmonly(){
             
             {/* Left Side: Picture + 3 elements below it */}
             <div className='film-information-left-flex'>
-            <div className='film-information__element film-information-picture' >img</div>
+            <div className='film-information__element film-information-picture' >selectedFilm[0]</div>
             <div className='film-information-left-bottom-flex'>
             <div className='film-information__element film-information-watched-count'>341</div>
             <div className='film-information__element film-information-list-count'>431</div>
@@ -34,7 +69,7 @@ function Filmonly(){
             {/* Middle: Description + 3 info elements below it*/}
             
             <div className='film-information-middle-flex'>
-            <div className='film-information__element film-information-description'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum iusto ipsum nobis autem, nesciunt voluptate illo in vel? Veniam porro sint quae nihil incidunt, iusto ipsam et ex magni explicabo?</div>
+            <div className='film-information__element film-information-description'>{selectedFilm[3]}</div>
             <div className='film-information-bottom-desc-flex'>
                 <div className='bottom-desc__element film-information__cast' onClick={() => setChoice_desc('actors')}>Cast</div>
                 <div className='bottom-desc__element film-information__director' onClick={() => setChoice_desc('directors')}>Directors</div>
@@ -47,7 +82,7 @@ function Filmonly(){
             <div className='film-information__element film-information__ratings'>
                 <h3>Rating</h3>
                 <hr></hr>
-                <div>3.4</div>
+                <div>{selectedFilm[4]}</div>
             </div>
             </div>
             
@@ -60,7 +95,7 @@ function Filmonly(){
 function currentDesc(arrays,choice_desc){
     return(
         <div className= "film-information-desc-category"> 
-        {arrays[choice_desc].map((item) => <div className='film-information-desc-category__child'>{item}</div>)}
+        {arrays[choice_desc]?.map((item) => <div className='film-information-desc-category__child'>{item}</div>)}
         </div>
     )
 }

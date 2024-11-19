@@ -18,7 +18,7 @@ async function listAllgenres() {
   let conn;
   try {
     conn = await oracledb.getConnection();
-    const result = await conn.execute(`SELECT GenreType FROM Genre`);
+    const result = await conn.execute(`SELECT * FROM Genre`);
     return result.rows;
   } catch (err) {
     throw err;
@@ -119,9 +119,9 @@ async function getMoviesByName(name) {
     );
 
     // Ensure that result.rows is not null or empty
-    if (!result.rows || result.rows.length === 0) {
-      return { message: "No movies found for the given name." };
-    }
+    // if (!result.rows || result.rows.length === 0) {
+    //   return { message: "No movies found for the given name." };
+    // }
 
     return result.rows;  // Return the found movies
   } catch (err) {
@@ -140,8 +140,12 @@ async function getMoviesByName(name) {
  * @returns {Array} - List of movies matching the rating range or highest/lowest ratings.
  */
 async function listMoviesByRatingRange(rating) {
+  let conn;
   try {
+    conn = await oracledb.getConnection();
+
     let query = '';
+    let params = {};
 
     if (rating === 6) {
       // Fetch highest rated movies
@@ -151,21 +155,31 @@ async function listMoviesByRatingRange(rating) {
       query = `SELECT * FROM movie ORDER BY AVERAGERATING ASC`;
     } else {
       // Rating ranges (e.g., 5 -> 5-4, 4 -> 4-3, etc.)
-      const rangeStart = rating;
-      const rangeEnd = rating - 1;
-      query = `SELECT * FROM movie WHERE AVERAGERATING <= ${rangeStart} AND AVERAGERATING > ${rangeEnd} ORDER BY AVERAGERATING DESC`;
+      query = `
+        SELECT * 
+        FROM movie 
+        WHERE AVERAGERATING <= :rangeStart AND AVERAGERATING > :rangeEnd 
+        ORDER BY AVERAGERATING DESC
+      `;
+      params.rangeStart = rating;
+      params.rangeEnd = rating - 1;
     }
-    let conn;
-    conn = await oracledb.getConnection();
-    console.log('Connected to Oracle database');
 
-    const result = await conn.execute(query);
+    const result = await conn.execute(query, params);
     return result.rows;
-  } catch (error) {
-    throw new Error('Error fetching movies by rating range: ' + error.message);
+  } catch (err) {
+    console.error('Error fetching movies by rating range:', err.message);
+    throw new Error('Error fetching movies by rating range: ' + err.message);
+  } finally {
+    if (conn) {
+      try {
+        await conn.close();
+      } catch (closeError) {
+        console.error('Error closing connection:', closeError.message);
+      }
+    }
   }
 }
-
 
 module.exports = {
   listAllmovies,

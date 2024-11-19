@@ -7,9 +7,11 @@ import Filmpage from "../PagesJS/Filmpage.js";
 import Signup from "../PagesJS/Signup.js";
 import Memberonly from "../PagesJS/Memberonly.js";
 import Filmonly from "../PagesJS/Filmonly.js";
+import { FilmProvider } from '../PagesJS/FilmContext.js';
 
 export default function App() {
   return (
+    <FilmProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Headerbox />}>
@@ -17,10 +19,12 @@ export default function App() {
           <Route path="films" element={<Filmpage />} />
           <Route path="members" element={<Memberspage />} />
           <Route path="memberonly" element={<Memberonly />} />
+          <Route path="filmonly" element={<Filmonly />} />
           <Route path="signup" element={<Signup />} />
         </Route>
       </Routes>
     </BrowserRouter>
+    </FilmProvider>
   );
 }
 

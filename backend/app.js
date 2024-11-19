@@ -2,7 +2,7 @@ const express = require("express");
 
 
 const movieRoutes = require("./routes/movieRoutes");
-
+const filmpageRoutes = require("./routes/filmpageRoutes");
 
 const db = require("./config/db");
 const bodyParser = require("body-parser");
@@ -21,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Routes
 
 app.use("/api", movieRoutes);
+app.use("/api", filmpageRoutes);
 
 // Catch-all route to verify that the app is running
 app.use("/", (req, res) => {

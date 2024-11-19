@@ -1,74 +1,105 @@
 import "../StyleCSS/Filmpage.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Outlet, Link } from "react-router-dom";
+import { useFilm } from './FilmContext.js' ;
 
-
-async function getgenre(id) {
-  try {
-    const response = await fetch(`http://localhost:3000/api/moviegenre/${id}`);
-    if (!response.ok) {
-      throw new Error(`Error: ${response.statusText}`);
-    }
-    const data = await response.json();
-    console.log(data);
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-
-const films = Array(33).fill();
-const genres = Array(5).fill("Crime");
 const decades = Array(10).fill(2020);
-const ratings = Array(5).fill(0);
-const allfilms = films.map((item, index) => (
-  <Link
-    to="/"
-    className="film-page__child"
-    key={index}
-  >
+
+
+function Filmpage() {
+
+  
+  const [films, setFilms] = useState([]); // Initialize films with empty values or placeholder
+  const { setSelectedFilm } = useFilm();
+
+function changeFilmsOnCriteria(get_api,criteria){
+  let custom_api = get_api + "" + criteria ;
+
+  fetch(custom_api, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      setFilms(data.data);
+    })
+    .catch((error) => console.error("Error fetching search results:", error));
+}  
+
+useEffect(() => {
+  fetch(`http://localhost:3001/api/movies/`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data.data);
+      setFilms(data.data);
+    })
+    .catch((error) => console.error("Error fetching search results:", error));
+}, []);
+const allfilms = films?.map((item, index) => (
+  <Link to={`/filmonly`} key={item[0]}
+  onClick={() => setSelectedFilm(item)}
+  className="film-page__child">
     <div className="film-card">
-      <h3 className="film-card__title">Film {index + 1}</h3>
-      <p className="film-card__info">Genre: {genres[index % genres.length]}</p>
-      <p className="film-card__info">Year: {decades[index % decades.length]}</p>
-      <p className="film-card__info">Rating: {ratings[index % ratings.length]}</p>
+      <h3 className="film-card__title">{item[0]}</h3>
+      <p className="film-card__info">{item[1]}</p>
+      <p className="film-card__info">
+        {new Date(item[2]).getFullYear()}
+      </p>
+      <p className="film-card__info">{item[4]}</p>
     </div>
   </Link>
 ));
+  const [genres, setGenres] = useState([]); // Initialize with an empty array
 
-function Filmpage() {
-  const [rating, setRating] = useState(0);
-  const [genre, setGenre] = useState(0);
-  const [year, setYear] = useState(0);
-  const [filmName, setFilmName] = useState("");
+useEffect(() => {
+  fetch(`http://localhost:3001/api/genres/`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data.data); // Assuming data.data is an array of genres
+      setGenres(data.data); // Set genres to the entire array from the API
+    })
+    .catch((error) => console.error("Error fetching genres:", error));
+}, []);
 
-  const allgenres = genres.map((item, index) => (
-    <div
-      className="film-page-criteria-dropdown__element"
-      onClick={() => console.log(getgenre(23))}
-      key={index}
-    >
-      {item}
-    </div>
-  ));
-
+const allgenres = genres.map((item, index) => (
+  <div
+    className="film-page-criteria-dropdown__element"
+    onClick={() => changeFilmsOnCriteria('http://localhost:3001/api/moviegenre?',`id=${item[0]}`)}
+    key={index}>
+    {item[1]}
+  </div>
+));
   const alldecades = decades.map((item, index) => (
     <div
       className="film-page-criteria-dropdown__element"
-      onClick={() => setYear(item - index * 10)}
+      onClick={() =>  changeFilmsOnCriteria('http://localhost:3001/api/moviedecade?',`decade=${item - index * 10}`)}
       key={index}
     >
       {item - index * 10}s
     </div>
   ));
 
-  const allratings = ratings.map((_, index) => (
+  const help = [1, 2, 3, 4, 5];
+
+  const allratings = help.map((item) => (
     <div
       className="film-page-criteria-dropdown__element"
-      onClick={() => setRating(6 - (index + 1))}
-      key={index}
+      onClick={() => changeFilmsOnCriteria('http://localhost:3001/api/movierating?', `rating=${item}`)}
     >
-      {6 - (index + 1)} stars
+      {item} stars
     </div>
   ));
 
@@ -76,7 +107,7 @@ function Filmpage() {
     <>
       <form
         className="film-page-criteria-selectorbox"
-        onSubmit={(event) => alert(filmName)}
+        onSubmit={(event) => alert()}
       >
         <label className="film-page-criteria-selectorbox__element">Find a film</label>
         <div className="film-page-criteria-selectorbox__element film-page-search">
@@ -84,7 +115,7 @@ function Filmpage() {
             className="film-page-criteria-selectorbox__element film-page-search-bar"
             type="text"
             name="hello"
-            onChange={(event) => setFilmName(event.target.value)}
+            onChange={(event) => event.target.value.length >0 ?changeFilmsOnCriteria('http://localhost:3001/api/moviename?', `name=${event.target.value}`) : changeFilmsOnCriteria('http://localhost:3001/api/movies','') }
           />
           <input
             type="submit"
@@ -111,12 +142,13 @@ function Filmpage() {
           <div className="film-age-criteria-dropdown">
             <div
               className="film-page-criteria-dropdown__element"
-              onClick={() => console.log(genre + " " + year + " " + rating)}
+              onClick={() => changeFilmsOnCriteria('http://localhost:3001/api/movierating?', 'rating=6')}
             >
               Highest
             </div>
             {allratings}
-            <div className="film-page-criteria-dropdown__element">Lowest</div>
+            <div className="film-page-criteria-dropdown__element"
+            onClick={() => changeFilmsOnCriteria('http://localhost:3001/api/movierating?', 'rating=0')}>Lowest</div>
           </div>
         </div>
       </form>

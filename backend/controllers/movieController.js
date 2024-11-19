@@ -97,10 +97,6 @@ async function getMoviesByNameHandler(req, res) {
     // Call the function to get movies by name
     const movies = await getMoviesByName(name);
 
-    if (movies.length === 0) {
-      return res.status(404).json({ message: 'No movies found' });
-    }
-
     res.json({ data: movies });
   } catch (error) {
     console.error('Error in getMoviesByNameHandler:', error);
@@ -126,7 +122,8 @@ async function getMoviesByRatingRange(req, res) {
     // Call the model function to fetch movies by rating range
     const movies = await listMoviesByRatingRange(Number(rating));
 
-    return res.status(200).json({ movies });
+    res.json({ data: movies });
+    // return res.status(200).json({ data: movies });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Error fetching movies by rating range', error: error.message });

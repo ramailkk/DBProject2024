@@ -267,3 +267,53 @@ INSERT INTO MovieUser (UserID, UserName, Email, Password, JoinDate)
 VALUES (10, 'AvaRodriguez', 'avarodriguez@example.com', 'avapassword', TO_DATE('2017-11-04', 'YYYY-MM-DD'));
 
 COMMIT;
+
+-- Insert actors
+INSERT INTO Actor (ActorID, Name, BirthDate) VALUES (1, 'Leonardo DiCaprio', TO_DATE('1974-11-11', 'YYYY-MM-DD'));  -- Inception
+INSERT INTO Actor (ActorID, Name, BirthDate) VALUES (2, 'Keanu Reeves', TO_DATE('1964-09-02', 'YYYY-MM-DD'));     -- The Matrix
+INSERT INTO Actor (ActorID, Name, BirthDate) VALUES (3, 'Morgan Freeman', TO_DATE('1937-06-01', 'YYYY-MM-DD'));    -- The Shawshank Redemption
+INSERT INTO Actor (ActorID, Name, BirthDate) VALUES (4, 'Marlon Brando', TO_DATE('1924-04-03', 'YYYY-MM-DD'));     -- The Godfather
+INSERT INTO Actor (ActorID, Name, BirthDate) VALUES (5, 'Kate Winslet', TO_DATE('1975-10-05', 'YYYY-MM-DD'));      -- Titanic
+INSERT INTO Actor (ActorID, Name, BirthDate) VALUES (6, 'Robert Downey Jr.', TO_DATE('1965-04-04', 'YYYY-MM-DD'));  -- Avengers: Endgame
+INSERT INTO Actor (ActorID, Name, BirthDate) VALUES (7, 'Sam Neill', TO_DATE('1947-09-14', 'YYYY-MM-DD'));         -- Jurassic Park
+INSERT INTO Actor (ActorID, Name, BirthDate) VALUES (8, 'Christian Bale', TO_DATE('1974-01-30', 'YYYY-MM-DD'));    -- The Dark Knight
+INSERT INTO Actor (ActorID, Name, BirthDate) VALUES (9, 'Tom Hanks', TO_DATE('1956-07-09', 'YYYY-MM-DD'));         -- Forrest Gump
+INSERT INTO Actor (ActorID, Name, BirthDate) VALUES (10, 'John Travolta', TO_DATE('1954-02-18', 'YYYY-MM-DD'));    -- Pulp Fiction
+
+-- Insert directors
+INSERT INTO Director (DirectorID, Name, BirthDate) VALUES (1, 'Christopher Nolan', TO_DATE('1970-07-30', 'YYYY-MM-DD'));  -- Inception
+INSERT INTO Director (DirectorID, Name, BirthDate) VALUES (2, 'The Wachowskis', TO_DATE('1965-12-29', 'YYYY-MM-DD'));    -- The Matrix
+INSERT INTO Director (DirectorID, Name, BirthDate) VALUES (3, 'Frank Darabont', TO_DATE('1959-01-28', 'YYYY-MM-DD'));    -- The Shawshank Redemption
+INSERT INTO Director (DirectorID, Name, BirthDate) VALUES (4, 'Francis Ford Coppola', TO_DATE('1939-04-07', 'YYYY-MM-DD'));  -- The Godfather
+INSERT INTO Director (DirectorID, Name, BirthDate) VALUES (5, 'James Cameron', TO_DATE('1954-08-16', 'YYYY-MM-DD'));    -- Titanic
+INSERT INTO Director (DirectorID, Name, BirthDate) VALUES (6, 'Anthony and Joe Russo', TO_DATE('1970-02-03', 'YYYY-MM-DD'));  -- Avengers: Endgame
+INSERT INTO Director (DirectorID, Name, BirthDate) VALUES (7, 'Steven Spielberg', TO_DATE('1946-12-18', 'YYYY-MM-DD'));  -- Jurassic Park
+INSERT INTO Director (DirectorID, Name, BirthDate) VALUES (8, 'Christopher Nolan', TO_DATE('1970-07-30', 'YYYY-MM-DD'));  -- The Dark Knight
+INSERT INTO Director (DirectorID, Name, BirthDate) VALUES (9, 'Robert Zemeckis', TO_DATE('1952-05-14', 'YYYY-MM-DD'));  -- Forrest Gump
+INSERT INTO Director (DirectorID, Name, BirthDate) VALUES (10, 'Quentin Tarantino', TO_DATE('1963-03-27', 'YYYY-MM-DD'));  -- Pulp Fiction
+
+-- Insert actors into the MovieActor table
+INSERT INTO MovieActor (MovieID, ActorID, Role) VALUES (1, 1, 'Dom Cobb');           -- Inception
+INSERT INTO MovieActor (MovieID, ActorID, Role) VALUES (2, 2, 'Neo');               -- The Matrix
+INSERT INTO MovieActor (MovieID, ActorID, Role) VALUES (3, 3, 'Ellis Boyd Redding'); -- The Shawshank Redemption
+INSERT INTO MovieActor (MovieID, ActorID, Role) VALUES (4, 4, 'Vito Corleone');      -- The Godfather
+INSERT INTO MovieActor (MovieID, ActorID, Role) VALUES (5, 5, 'Rose DeWitt Bukater'); -- Titanic
+INSERT INTO MovieActor (MovieID, ActorID, Role) VALUES (6, 6, 'Tony Stark');          -- Avengers: Endgame
+INSERT INTO MovieActor (MovieID, ActorID, Role) VALUES (7, 7, 'Dr. Alan Grant');      -- Jurassic Park
+INSERT INTO MovieActor (MovieID, ActorID, Role) VALUES (8, 8, 'Bruce Wayne / Batman'); -- The Dark Knight
+INSERT INTO MovieActor (MovieID, ActorID, Role) VALUES (9, 9, 'Forrest Gump');         -- Forrest Gump
+INSERT INTO MovieActor (MovieID, ActorID, Role) VALUES (10, 10, 'Vincent Vega');      -- Pulp Fiction
+
+-- Insert directors into the MovieDirector table
+INSERT INTO MovieDirector (MovieID, DirectorID, Role) VALUES (1, 1, 'Director');  -- Inception
+INSERT INTO MovieDirector (MovieID, DirectorID, Role) VALUES (2, 2, 'Director');  -- The Matrix
+INSERT INTO MovieDirector (MovieID, DirectorID, Role) VALUES (3, 3, 'Director');  -- The Shawshank Redemption
+INSERT INTO MovieDirector (MovieID, DirectorID, Role) VALUES (4, 4, 'Director');  -- The Godfather
+INSERT INTO MovieDirector (MovieID, DirectorID, Role) VALUES (5, 5, 'Director');  -- Titanic
+INSERT INTO MovieDirector (MovieID, DirectorID, Role) VALUES (6, 6, 'Directors');  -- Avengers: Endgame
+INSERT INTO MovieDirector (MovieID, DirectorID, Role) VALUES (7, 7, 'Director');  -- Jurassic Park
+INSERT INTO MovieDirector (MovieID, DirectorID, Role) VALUES (8, 8, 'Director');  -- The Dark Knight
+INSERT INTO MovieDirector (MovieID, DirectorID, Role) VALUES (9, 9, 'Director');  -- Forrest Gump
+INSERT INTO MovieDirector (MovieID, DirectorID, Role) VALUES (10, 10, 'Director');  -- Pulp Fiction
+
+COMMIT;

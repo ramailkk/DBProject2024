@@ -1,5 +1,5 @@
 import "../StyleCSS/Filmpage.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { useFilm } from './FilmContext.js' ;
 
@@ -7,6 +7,14 @@ const decades = Array(10).fill(2020);
 
 
 function Filmpage() {
+      // Inside the function component
+const isMounted = useRef(true); // Flag to track mount status
+
+useEffect(() => {
+  return () => {
+    isMounted.current = false; // Set to false when the component unmounts
+  };
+}, []);
 
   
   const [films, setFilms] = useState([]); // Initialize films with empty values or placeholder
@@ -104,7 +112,7 @@ const allgenres = genres.map((item, index) => (
   ));
 
   return (
-    <>
+    <div>
       <form
         className="film-page-criteria-selectorbox"
         onSubmit={(event) => alert()}
@@ -114,14 +122,14 @@ const allgenres = genres.map((item, index) => (
           <input
             className="film-page-criteria-selectorbox__element film-page-search-bar"
             type="text"
-            name="hello"
+            name="search"
             onChange={(event) => event.target.value.length >0 ?changeFilmsOnCriteria('http://localhost:3001/api/moviename?', `name=${event.target.value}`) : changeFilmsOnCriteria('http://localhost:3001/api/movies','') }
           />
-          <input
+          {/* <input
             type="submit"
             value="Search"
             className="film-page-criteria-selectorbox__element film-page-search-button"
-          />
+          /> */}
         </div>
         <div className="film-page-criteria-selectorbox__element">
           <button className="film-page-criteria-dropdown__button film-page-genre-criteria">
@@ -156,7 +164,7 @@ const allgenres = genres.map((item, index) => (
         <h2 className="film-page-outer-heading">All Films</h2>
         <div className="film-page-container">{allfilms}</div>
       </div>
-    </>
+    </div>
   );
 }
 

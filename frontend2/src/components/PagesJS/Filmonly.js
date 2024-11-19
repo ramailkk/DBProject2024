@@ -1,4 +1,4 @@
-import { useState , useEffect} from 'react';
+import { useState , useEffect, useRef} from 'react';
 import '../StyleCSS/Filmonly.css'
 import { useParams } from 'react-router-dom';
 import { useFilm } from './FilmContext.js';
@@ -7,7 +7,15 @@ import { useFilm } from './FilmContext.js';
 
 function Filmonly(){ 
 
-    
+    // Inside the function component
+const isMounted = useRef(true); // Flag to track mount status
+
+useEffect(() => {
+  return () => {
+    isMounted.current = false; // Set to false when the component unmounts
+  };
+}, []);
+
 
     const { selectedFilm } = useFilm();
 
@@ -46,8 +54,8 @@ function Filmonly(){
     }
 
     return(
-        <>
-        <div className='film-information-container'> 
+        <div>
+                    <div className='film-information-container'> 
             
             <div className='film-information__element film-information-title'>{selectedFilm[1]}</div>
 
@@ -87,7 +95,7 @@ function Filmonly(){
             </div>
             
         </div>
-        </>
+        </div>
     )
 }
 

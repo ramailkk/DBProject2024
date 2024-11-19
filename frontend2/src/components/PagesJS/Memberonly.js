@@ -28,7 +28,7 @@ function getrecentReviews(array) {
 
 function Memberonly(){
     return(
-    <>
+    <div>
 
     {/* Topmost bar with user information */}
     <div className="member-information-userbox">
@@ -79,7 +79,7 @@ function Memberonly(){
     </div>
     </div>
 
-    </>   
+    </div>   
     )
 }
 export default Memberonly

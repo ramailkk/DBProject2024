@@ -12,7 +12,7 @@ function Dashboard() {
         ));
     }
 
-    return(<>
+    return(<div>
     <div className='dashboard-grid'>
 
         {/* Popular Movies Grid */}
@@ -30,6 +30,6 @@ function Dashboard() {
         <hr className='dashboard-grid-headingline'></hr>
         <div className='dashboard-grid-category suggested-movies'>{getgridMovies(suggestedMovies)}</div>
     </div>
-    </>)
+    </div>)
 }
 export default Dashboard;

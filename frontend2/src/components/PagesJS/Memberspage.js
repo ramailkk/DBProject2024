@@ -69,7 +69,7 @@ function Memberspage(){
 
 
     return(
-        <>
+        <div>
         <div className="members-page-container">
 
             {/* MAKE MULITPLE ONCLICK TO SORT IN ASCNEDING DECENDING WHEN CLICKING ON COLUMN NAMES */}
@@ -84,7 +84,7 @@ function Memberspage(){
             
             {memberlist}
         </div>
-        </>
+        </div>
     )
 }
 export default Memberspage;

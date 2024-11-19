@@ -10,14 +10,14 @@ function Headerbox(){
     // logout
     return(    
         
-        <>
+        <div>
         <div className="headerbox">
         <Link Link to="/" className="headerboxcomponent logo" onClick={() => tab === "logging" ? setTab("logout"): ""}>MovieMangement</Link>
         {logRender(tab,setTab)}
         </div>
 
         <Outlet />
-        </>
+        </div>
     )
 }
 
@@ -48,7 +48,7 @@ function logOut(tab, setTab){
 
 function Logging(tab,setTab){
     return(
-        <>
+        <div>
         <div className="Login-tab">
 
             <form className="login-block">
@@ -61,14 +61,14 @@ function Logging(tab,setTab){
                 <input className="login-submit" type="submit" value={"Sign In"}></input>
             </form>
         </div>
-        </>
+        </div>
     )
 }
 
 
     function logIn(tab,setTab){
         return(
-            <>
+            <div>
         <div className="header-links">
         <Link to="memberonly" className="headerboxcomponent">insertName</Link>
         <Link to="/films" className="headerboxcomponent">Films</Link>
@@ -77,7 +77,7 @@ function Logging(tab,setTab){
             Logout
         </div>
         </div>
-        </>
+        </div>
         )
     }
 

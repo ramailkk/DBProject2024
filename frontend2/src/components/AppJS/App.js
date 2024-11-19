@@ -11,6 +11,7 @@ import { FilmProvider } from '../PagesJS/FilmContext.js';
 
 export default function App() {
   return (
+    <div>
     <FilmProvider>
     <BrowserRouter>
       <Routes>
@@ -25,6 +26,7 @@ export default function App() {
       </Routes>
     </BrowserRouter>
     </FilmProvider>
+    </div>
   );
 }
 

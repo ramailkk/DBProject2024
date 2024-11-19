@@ -29,7 +29,7 @@ function Signup(){
         });
     }
     return (
-        <>
+        <div>
         <div className="signup-block">
             <div className="signup-exit-to-home"><Link to="/" >X</Link></div>
             <span className="signup-element heading">Create a new account</span>
@@ -49,7 +49,7 @@ function Signup(){
                 <input type="submit" className="signup-form-element submit-button" value="Sign Up" />
             </form>
         </div>
-    </>
+    </div>
     );
 }      
 export default Signup;

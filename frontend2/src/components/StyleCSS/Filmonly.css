@@ -1,87 +1,180 @@
-*{
+* {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
 }
 
-.film-information-container{
+.film-information-container {
     position: relative;
     border: 2px solid red;
-    height: 100vh;
-    width: 800px;
-    left: 50%;
-    transform: translate(-50%, 0);
+    max-width: 1200px; /* Adjusted for a more standard container size */
+    margin: 0 auto;
+    padding: 20px; /* Added padding for spacing inside the container */
 }
-.film-information__element{
+
+.film-information__element {
     display: inline-block;
     border: 1px solid black;
     flex-shrink: 0;
     flex-grow: 0;
+    padding: 10px; /* Added spacing for better separation */
 }
-.film-information-title{
+
+.film-information-title {
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
-}
-.film-information-picture{
-    width: 150px;
-    height: 200px;
-}
-.film-information-description{
-    width: 500px;
-    height: 200px;
-}
-
-.film-information-three-row-structure-flex{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    margin-top: 30px;
-    /* gap: 20px; */
+    justify-content: center;
+    align-items: center;
+    gap: 15px; /* Increased gap for better readability */
 }
 
-.film-information__ratings{
+.film-information-title__element {
+    font-size: 1.8rem; /* Slightly larger for better visibility */
+}
+
+.title-name {
+    font-size: 2.5rem;
+    font-weight: bold; /* Added weight for emphasis */
+}
+
+.title-year,
+.title-director {
+    text-decoration: underline;
+    font-size: 1.2rem; /* Added size for better legibility */
+}
+
+.film-information-picture {
+    width: 300px; /* Slightly larger for better visual impact */
+    height: 400px; /* Adjusted proportionally */
+    object-fit: cover; /* Ensures the image looks good */
+}
+
+.film-information-description {
+    height: 250px; /* Slightly increased for better readability */
+    padding: 10px;
+    font-size: 1rem;
+    line-height: 1.5;
+    overflow-y: auto; /* Ensures scrolling for long descriptions */
+    /* background-color: #f8f8f8; Added light background for contrast */
+}
+
+.film-information-three-row-structure-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* Adjusted for equal spacing */
+    align-items: start;
+    margin-top: 40px;
+    gap: 20px; /* Added consistent gap */
+}
+
+
+.film-information__ratings {
     text-align: center;
-    height: 60px;
+    height: 80px; /* Increased height for better alignment */
+    font-size: 1.2rem;
+    line-height: 2rem;
+    padding: 5px;
+    border: 1px solid gray; /* Added border for clarity */
 }
-.film-information-left-flex{
+
+.film-information-left-flex {
     display: flex;
     flex-direction: column;
+    gap: 15px; /* Added gap for spacing */
 }
-.film-information-left-bottom-flex{
+
+.film-information-left-bottom-flex {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between; /* Better alignment for children */
+    gap: 10px;
 }
-.film-information-middle-flex{
+
+.film-information-middle-flex {
     display: flex;
     flex-direction: column;
+    gap: 15px;
 }
-.film-information-bottom-desc-flex{
+
+
+.film-information-bottom-desc-flex {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     border: 2px solid red;
+    margin-top: 20px; /* Added spacing from above */
+    padding: 10px; /* Added padding for better spacing */
 }
-.bottom-desc__element{
+
+.bottom-desc__element {
     cursor: pointer;
     user-select: none;
-}
-.choice-desc{
-    width: 500px;
-    border: 2px solid red;
+    padding: 5px;
+    font-size: 1rem; /* Standardized font size */
+    transition: background-color 0.3s ease-in-out; /* Added hover effect */
 }
 
-.film-information-desc-category{
-    width: 500px;
+.bottom-desc__element:hover {
+    background-color: #ddd;
+}
+
+.choice-desc {
+    width: 450px; /* Adjusted size for balance */
+    border: 2px solid red;
+    padding: 10px;
+}
+
+.film-information-desc-category {
+    width: 100%; /* Full width for flexibility */
     border: 2px solid red;
     text-transform: capitalize;
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 15px; /* Increased gap for spacing */
     flex-wrap: wrap;
-}
-.film-information-desc-category__child{
-    border: 2px solid darkblue;
+    padding: 10px; /* Added padding for spacing */
 }
 
+.film-information-desc-category__child {
+    border: 2px solid darkblue;
+    padding: 5px;
+    font-size: 1rem;
+    text-align: center;
+    min-width: 80px; /* Added minimum size for consistency */
+    flex-grow: 1; /* Ensures equal distribution */
+}
+
+.film-information-right-flex{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+.film-information__log-options{
+    width: 300px;
+    height: 200px;
+}
+
+.film-information-log-options__logout{
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.film-information-log-options__login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+}
+.film-information-login__element{
+    background-color: maroon;
+    width: 300px;
+    text-align: center;
+    padding: 0.5rem 0;
+    cursor: pointer;
+}

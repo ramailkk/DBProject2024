@@ -57,7 +57,12 @@ useEffect(() => {
         <div>
                     <div className='film-information-container'> 
             
-            <div className='film-information__element film-information-title'>{selectedFilm[1]}</div>
+            <div className='film-information__element film-information-title'>
+                <p className='film-information-title__element title-name'>{selectedFilm[1]}</p>
+                <p className='film-information-title__element title-year'>{new Date(selectedFilm[2]).getFullYear()}</p>
+                <p className='film-information-title__element title-directed-by'>Directed by</p>
+                <p className='film-information-title__element title-director'>{directors[0]}</p>
+            </div>
 
 
             {/* 3 Part Structure Row */}
@@ -87,10 +92,17 @@ useEffect(() => {
             </div>
             
             {/*Right: Rating + Number  */}
-            <div className='film-information__element film-information__ratings'>
-                <h3>Rating</h3>
-                <hr></hr>
-                <div>{selectedFilm[4]}</div>
+
+            <div className='film-information-right-flex'>
+                <div className='film-information__element film-information__log-options'>
+                    {renderLogOptions("login")}
+                </div>
+
+                <div className='film-information__element film-information__ratings'>
+                    <h3>Rating</h3>
+                    <hr></hr>
+                    <div>{selectedFilm[4]}</div>
+                </div>
             </div>
             </div>
             
@@ -106,6 +118,29 @@ function currentDesc(arrays,choice_desc){
         {arrays[choice_desc]?.map((item) => <div className='film-information-desc-category__child'>{item}</div>)}
         </div>
     )
+}
+    // login
+    // logging
+    // logout
+function renderLogOptions(currentLogStatus){
+    if(currentLogStatus === 'logout'){
+        return(
+    <div className='film-information__element film-information-log-options__logout '>
+        Sign in to log, rate or review
+    </div>
+        )
+    }
+    else if(currentLogStatus === 'login'){
+        return(
+            <div className='film-information__element film-information-log-options__login'>
+                    <div className='film-information-login__element film-information-login-watched'>Add to Watched</div>
+                    <div className='film-information-login__element film-information-login-watchlist'>Add to Watchlist</div>
+                    <div className='film-information-login__element film-information-login-watchlist'>Add to Favorites</div>
+                    <div className='film-information-login__element film-information-login-watchlist'>Add a Review</div>
+                    <div className='film-information-login__element film-information-login-watchlist'>Add to Lists?</div>
+            </div>
+                )
+    }
 }
 
 export default Filmonly;

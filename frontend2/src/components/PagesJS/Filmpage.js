@@ -117,8 +117,8 @@ const allgenres = genres.map((item, index) => (
         className="film-page-criteria-selectorbox"
         onSubmit={(event) => alert()}
       >
-        <label className="film-page-criteria-selectorbox__element">Find a film</label>
         <div className="film-page-criteria-selectorbox__element film-page-search">
+        <label className="film-page-criteria-selectorbox__element flm_page-find-film">Find a film</label>
           <input
             className="film-page-criteria-selectorbox__element film-page-search-bar"
             type="text"
@@ -132,20 +132,23 @@ const allgenres = genres.map((item, index) => (
           /> */}
         </div>
         <div className="film-page-criteria-selectorbox__element">
+          <p className="film-page-browse-by">Browse by</p>
+        </div>
+        <div className="film-page-criteria-selectorbox__element">
           <button className="film-page-criteria-dropdown__button film-page-genre-criteria">
-            Genre
+          <p>Genre <i class="arrow down"></i></p>
           </button>
           <div className="film-age-criteria-dropdown">{allgenres}</div>
         </div>
         <div className="film-page-criteria-selectorbox__element">
           <button className="film-page-criteria-dropdown__button film-page-genre-criteria">
-            Year
+          <p>Year <i class="arrow down"></i></p>
           </button>
           <div className="film-age-criteria-dropdown">{alldecades}</div>
         </div>
         <div className="film-page-criteria-selectorbox__element">
           <button className="film-page-criteria-dropdown__button film-page-genre-criteria">
-            Rating
+          <p>Rating <i class="arrow down"></i></p>
           </button>
           <div className="film-age-criteria-dropdown">
             <div
@@ -161,7 +164,7 @@ const allgenres = genres.map((item, index) => (
         </div>
       </form>
       <div className="film-page-outer-container">
-        <h2 className="film-page-outer-heading">All Films</h2>
+        {/* <h2 className="film-page-outer-heading">All Films</h2> */}
         <div className="film-page-container">{allfilms}</div>
       </div>
     </div>

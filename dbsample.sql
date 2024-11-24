@@ -8,12 +8,14 @@ CREATE TABLE MovieUser (
 );
 
 -- UserList Table
-CREATE TABLE UserList (
-    ListID INT PRIMARY KEY,
-    UserID INT,
-    ListName VARCHAR(100) NOT NULL,
-    FOREIGN KEY (UserID) REFERENCES MovieUser(UserID) ON DELETE CASCADE
+CREATE TABLE USERLIST (
+USERID NUMBER(38, 0),            -- Foreign key to MOVIEUSER table
+LISTID NUMBER(38, 0),            -- Identifies the list (1, 2, 3 for each user)
+LISTNAME VARCHAR2(100 BYTE),     -- Name of the list
+PRIMARY KEY (USERID, LISTID),    -- Composite primary key
+CONSTRAINT FK_LIST_USER FOREIGN KEY (USERID) REFERENCES MOVIEUSER(USERID)
 );
+
 
 
 CREATE TABLE Movie (
@@ -37,14 +39,15 @@ CREATE TABLE Reviews (
 );
 
 -- ListMovies Table
-CREATE TABLE ListMovies (
-    ListID INT,
-    MovieID INT,
-    PRIMARY KEY (ListID, MovieID),
-    FOREIGN KEY (ListID) REFERENCES UserList(ListID) ON DELETE CASCADE,
-    FOREIGN KEY (MovieID) REFERENCES Movie(MovieID) ON DELETE CASCADE
-);
 
+CREATE TABLE ListMovies (
+    UserID NUMBER(38, 0),
+    ListID NUMBER(38, 0),
+    MovieID NUMBER(38, 0),
+    PRIMARY KEY (UserID, ListID, MovieID),  -- Composite primary key including UserID, ListID, and MovieID
+    FOREIGN KEY (UserID, ListID) REFERENCES UserList(UserID, ListID) ON DELETE CASCADE,  -- Foreign key referencing composite key of UserList
+    FOREIGN KEY (MovieID) REFERENCES Movie (MovieID)  -- Foreign key referencing Movie table (assuming Movie table exists)
+);
 -- Actor Table
 CREATE TABLE Actor (
     ActorID INT PRIMARY KEY,
@@ -92,6 +95,24 @@ CREATE TABLE MovieGenre (
     FOREIGN KEY (GenreID) REFERENCES Genre(GenreID) ON DELETE CASCADE,
     FOREIGN KEY (MovieID) REFERENCES Movie(MovieID) ON DELETE CASCADE
 );
+
+CREATE OR REPLACE TRIGGER TRG_CREATE_USER_LISTS
+AFTER INSERT ON MOVIEUSER
+FOR EACH ROW
+BEGIN
+  -- Insert "Favorites" list with LISTID = 1
+  INSERT INTO LISTS (USERID, LISTID, LISTNAME)
+  VALUES (:NEW.USERID, 1, 'Favorites');
+  
+  -- Insert "Watch Later" list with LISTID = 2
+  INSERT INTO LISTS (USERID, LISTID, LISTNAME)
+  VALUES (:NEW.USERID, 2, 'Watch Later');
+  
+  -- Insert "Reviewed" list with LISTID = 3
+  INSERT INTO LISTS (USERID, LISTID, LISTNAME)
+  VALUES (:NEW.USERID, 3, 'Reviewed');
+END;
+/
 
 
 INSERT INTO Movie (MovieID, Title, ReleaseDate, Description) VALUES

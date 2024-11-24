@@ -45,8 +45,8 @@ function Memberonly(){
 
 {/* Below the top bar which contains links to other user specific pages */}
     <div className="member-information-connectionbox">
-        <a href="google.com" className="member-information-connectionbox__element user_profile">Profile</a>
         <a href="google.com" className="member-information-connectionbox__element watched">Watched</a>
+        <a href="google.com" className="member-information-connectionbox__element user_profile">Favorites</a>
         <a href="google.com" className="member-information-connectionbox__element watchlist">Watchlist</a>
         <a href="google.com" className="member-information-connectionbox__element lists">Lists</a>
         <a href="google.com" className="member-information-connectionbox__element reviews">Reviews</a>

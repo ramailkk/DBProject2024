@@ -1,10 +1,10 @@
 import "../StyleCSS/Filmpage.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext} from "react";
 import { Outlet, Link } from "react-router-dom";
 import { useFilm } from './FilmContext.js' ;
+import { useSelectedMember } from './SelectedMemberContext.js';
 
 const decades = Array(10).fill(2020);
-
 
 function Filmpage() {
       // Inside the function component
@@ -19,6 +19,11 @@ useEffect(() => {
   
   const [films, setFilms] = useState([]); // Initialize films with empty values or placeholder
   const { setSelectedFilm } = useFilm();
+
+
+  const { selectedMember } = useSelectedMember();
+
+
 
 function changeFilmsOnCriteria(get_api,criteria){
   let custom_api = get_api + "" + criteria ;
@@ -163,12 +168,31 @@ const allgenres = genres.map((item, index) => (
           </div>
         </div>
       </form>
+
+
+
       <div className="film-page-outer-container">
         {/* <h2 className="film-page-outer-heading">All Films</h2> */}
-        <div className="film-page-container">{allfilms}</div>
+        <div className="film-page-context">
+          {renderCurrentUserList(selectedMember)}
+        </div>
+        <div className="film-page-container">
+          {allfilms}</div>
       </div>
     </div>
   );
 }
+
+function renderCurrentUserList(selectedMember){
+
+  if (selectedMember !== null){
+  const { userId, listId } = selectedMember;
+  
+  return(
+<div>{userId + " " + listId }</div>
+  )
+}
+}
+
 
 export default Filmpage;

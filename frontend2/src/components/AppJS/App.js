@@ -8,13 +8,16 @@ import Signup from "../PagesJS/Signup.js";
 import Memberonly from "../PagesJS/Memberonly.js";
 import Filmonly from "../PagesJS/Filmonly.js";
 import { FilmProvider } from '../PagesJS/FilmContext.js';
+import { SelectedMemberContext, SelectedMemberProvider } from '../PagesJS/SelectedMemberContext.js';
+import Reviews from "../PagesJS/Reviews.js";
 
 export default function App() {
   return (
     <div>
-    <FilmProvider>
+    {/* <FilmProvider>
     <BrowserRouter>
-      <Routes>
+    <SelectedMemberProvider>
+            <Routes>
         <Route path="/" element={<Headerbox />}>
           <Route index element={<Dashboard />} />
           <Route path="films" element={<Filmpage />} />
@@ -24,8 +27,10 @@ export default function App() {
           <Route path="signup" element={<Signup />} />
         </Route>
       </Routes>
+      </SelectedMemberProvider>
     </BrowserRouter>
-    </FilmProvider>
+    </FilmProvider> */}
+    <Reviews></Reviews>
     </div>
   );
 }

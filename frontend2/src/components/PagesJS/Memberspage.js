@@ -3,10 +3,14 @@ import eyeImage from "../Styleicons/eye2.png";
 import listImage from "../Styleicons/windows.png";
 import reviewImage from "../Styleicons/review.png";
 import sampleAvatar from "../Styleicons/avatar.png";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext} from "react";
 
+import { useSelectedMember } from "./SelectedMemberContext";
+import { Outlet, Link,useNavigate } from "react-router-dom";
 function fetchMemberDetails(get_api, critera, setArray) {
-  let customApi = get_api + "" + critera;
+
+
+let customApi = get_api + "" + critera;
   fetch(customApi, {
     method: "GET",
     headers: {
@@ -22,6 +26,16 @@ function fetchMemberDetails(get_api, critera, setArray) {
 }
 
 function Memberspage() {
+
+  const { setSelectedMember } = useSelectedMember();
+  const navigate = useNavigate();
+
+  const handleSelectMember = (userId,listId) => {
+    setSelectedMember({ userId, listId });
+    navigate('/films');
+  };
+
+
   const [members, setMembers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // Current page number
   const [membersPerPage] = useState(14); // Members per page
@@ -39,18 +53,19 @@ function Memberspage() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const memberlist = currentMembers.map((item) => (
-    <div key={item[0]}>
+
+    <Link key={item[0]}>
       <div className="members-page__element">
         <img src={sampleAvatar} className="members-page-profile multiple-member-picture" alt="Avatar" />
         <div className="members-page-profile multiple-member-name">
           <span>{item[1]}</span>
         </div>
-        <div className="members-page-profile multiple-member-watchedcount">
+        <Link to={"/films"} className="members-page-profile multiple-member-watchedcount"  onClick={() => handleSelectMember(item[0],1)}>
           <div className="members-page-profile-flex__image">
             <img src={eyeImage} alt="Eye" />
           </div>
-          <div className="members-page-profile-flex__content">{item[2]}</div>
-        </div>
+          <div>{item[2]}</div>
+        </Link>
 
         <div className="members-page-profile mutliple-member-listcount">
           <div className="members-page-profile-flex__image">
@@ -67,7 +82,7 @@ function Memberspage() {
         </div>
       </div>
       <hr className="members-page-profile-linebreak" />
-    </div>
+    </Link>
   ));
 
   // Calculate total pages
@@ -113,5 +128,6 @@ function Memberspage() {
     </div>
   );
 }
+
 
 export default Memberspage;

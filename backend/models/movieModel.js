@@ -79,11 +79,6 @@ async function listMoviesByDecade(decade) {
   }
 }
 
-
-
-
-
-
 /**
  * Fetch all movies from the database.
  * 

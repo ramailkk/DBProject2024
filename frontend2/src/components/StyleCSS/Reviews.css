@@ -1,0 +1,202 @@
+/* General container styling for the review page */
+.review-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px;
+    background-color: #f4f4f9;
+}
+
+/* Main container for review items */
+.review-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    width: 80%;
+    max-width: 1200px;
+    border: 1px solid #cfcfcf;
+    border-radius: 8px;
+    padding: 30px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading styling */
+.review-page-heading {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+/* Styling for the review container */
+.review-page-review-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Individual review element styling */
+.review-page-review__element {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    border: 2px solid #ee6e73;
+    border-radius: 8px;
+    padding: 20px;
+    gap: 20px;
+    background-color: #fafafa;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Poster image styling */
+.review-page-review__poster {
+    width: 100px;
+    height: 150px;
+    background-color: lightgray;
+    border-radius: 5px;
+    border: 2px solid #006064;
+    flex-shrink: 0;
+}
+
+/* Review details section */
+.review-page-review__details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+/* Reviewer name styling */
+.review-page-review__name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Review rating styling */
+.review-page-review__rating {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #27ae60;
+}
+
+/* Review date styling */
+.review-page-review__date {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+/* Comment section styling */
+.review-page-review__comment {
+    font-size: 1rem;
+    line-height: 1.6;
+    border: 1px solid #006064;
+    border-radius: 6px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    color: #34495e;
+}
+
+/* Container for the criteria selector box */
+.review-page-criteria-selectorbox {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+    padding: 20px;
+    margin: 0;
+}
+
+/* Individual selector element */
+.review-page-criteria-selectorbox__element {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+
+/* 'Browse by' text */
+.review-page-browse-by {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+/* Dropdown button styling */
+.review-page-criteria-dropdown__button {
+    background-color: #04AA6D;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Arrow icon in the dropdown button */
+.review-page-criteria-dropdown__button i.arrow {
+    font-size: 1rem;
+    margin-left: 8px;
+}
+
+/* Dropdown content styling */
+.review-page-age-criteria-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #333;
+    border-radius: 4px;
+    z-index: 1;
+    width: 100%;
+    padding: 10px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+/* Show dropdown when hovering over the button */
+.review-page-criteria-selectorbox__element:hover .review-page-age-criteria-dropdown {
+    display: block;
+}
+
+/* Dropdown item styling */
+.review-page-criteria-dropdown__element {
+    color: #f5f5f5;
+    padding: 0.75rem 1.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-bottom: 1px solid #444;
+}
+
+/* Hover effect for dropdown items */
+.review-page-criteria-dropdown__element:hover {
+    background-color: #04AA6D;
+    color: white;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .review-page-criteria-selectorbox {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 15px;
+    }
+
+    .review-page-criteria-selectorbox__element {
+        width: 100%;
+        margin: 0;
+    }
+}

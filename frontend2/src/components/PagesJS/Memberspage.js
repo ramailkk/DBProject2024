@@ -30,7 +30,7 @@ function Memberspage() {
   const { setSelectedMember } = useSelectedMember();
   const navigate = useNavigate();
 
-  const handleSelectMember = (userId,listId,event) => {
+  const handleSelectMemberLists = (userId,listId,event) => {
     event.preventDefault();
     setSelectedMember({ userId, listId });
     setTimeout(() => {
@@ -41,6 +41,12 @@ function Memberspage() {
     setSelectedMember({ userId }); // Set the userId in the context as an object
     navigate('/reviews');
   };
+  const handleSelectMemberOnly = (userId) => {
+    setSelectedMember({ userId }); // Set the userId in the context as an object
+    navigate('/memberonly');
+    console.log(userId);
+  };
+  
 
 
 
@@ -64,18 +70,19 @@ function Memberspage() {
 
     <Link key={item[0]}>
       <div className="members-page__element">
-        <img src={sampleAvatar} className="members-page-profile multiple-member-picture" alt="Avatar" />
-        <div className="members-page-profile multiple-member-name">
+        <Link img to={"/memberonly"} onClick={() => handleSelectMemberOnly(item[0])}><img  src={sampleAvatar} className="members-page-profile multiple-member-picture" alt="Avatar"  />
+        </Link>
+        <Link to={"/memberonly"}className="members-page-profile multiple-member-name" onClick={() => handleSelectMemberOnly(item[0])}>
           <span>{item[1]}</span>
-        </div>
-        <Link to={"/films"} className="members-page-profile multiple-member-watchedcount"  onClick={(event) => handleSelectMember(item[0],1,event)}>
+        </Link>
+        <Link to={"/films"} className="members-page-profile multiple-member-watchedcount"  onClick={(event) => handleSelectMemberLists(item[0],1,event)}>
           <div className="members-page-profile-flex__image">
             <img src={eyeImage} alt="Eye" />
           </div>
           <div>{item[2]}</div>
         </Link>
 
-        <div className="members-page-profile mutliple-member-listcount">
+        <div className="members-page-profile mutliple-member-listcount" onClick={(event) => handleSelectMemberLists(item[0],2,event)}>
           <div className="members-page-profile-flex__image">
             <img src={listImage} alt="List" />
           </div>
@@ -109,7 +116,7 @@ function Memberspage() {
             <span>Films</span>
           </div>
           <div className="members-page-profile mutliple-member-listcount members-page-columns">
-            <span>Lists</span>
+            <span>Favorites</span>
           </div>
           <div className="members-page-profile multiple-member-reviewcount members-page-columns">
             <span>Reviews</span>

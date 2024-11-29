@@ -1,6 +1,7 @@
 import "../StyleCSS/Memberonly.css";
-
-
+import { useSelectedMember } from './SelectedMemberContext.js';
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const popularMovies = Array(4).fill(0); // Replace with actual data if available
 const newMovies = Array(4).fill(0); // Replace with actual data if available
 
@@ -26,7 +27,27 @@ function getrecentReviews(array) {
     ));
 }
 
+
+
 function Memberonly(){
+
+    const { selectedMember } = useSelectedMember();
+    console.log(selectedMember?.userId); // Safely log userId
+    const { setSelectedMember } = useSelectedMember();
+    const navigate = useNavigate();
+  
+    const handleSelectMemberLists = (userId,listId,event) => {
+        event.preventDefault();
+        setSelectedMember({ userId, listId });
+        setTimeout(() => {
+          navigate("/films");
+        }, 0);
+      };
+      const handleSelectMemberReviews = (userId) => {
+        setSelectedMember({ userId }); // Set the userId in the context as an object
+        navigate('/reviews');
+      };
+
     return(
     <div>
 
@@ -45,11 +66,10 @@ function Memberonly(){
 
 {/* Below the top bar which contains links to other user specific pages */}
     <div className="member-information-connectionbox">
-        <a href="google.com" className="member-information-connectionbox__element watched">Watched</a>
-        <a href="google.com" className="member-information-connectionbox__element user_profile">Favorites</a>
-        <a href="google.com" className="member-information-connectionbox__element watchlist">Watchlist</a>
-        <a href="google.com" className="member-information-connectionbox__element lists">Lists</a>
-        <a href="google.com" className="member-information-connectionbox__element reviews">Reviews</a>
+        <Link to={'/films'} className="member-information-connectionbox__element watched" onClick={(event) => handleSelectMemberLists(selectedMember.userId,1,event)}>Watched</Link>
+        <Link to={'/films'}className="member-information-connectionbox__element watched" onClick={(event) => handleSelectMemberLists(selectedMember.userId,2,event)}>WatchList</Link>
+        <Link to={'/films'}className="member-information-connectionbox__element watched" onClick={(event) => handleSelectMemberLists(selectedMember.userId,3,event)}>Favorites</Link>
+        <Link  to={'/reviews'}className="member-information-connectionbox__element watched" onClick={() => handleSelectMemberReviews(selectedMember.userId)}>Reviews</Link>
     </div>
 
 

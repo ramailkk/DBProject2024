@@ -72,10 +72,7 @@ useEffect(() => {
             <div className='film-information-left-flex'>
             <div className='film-information__element film-information-picture' >selectedFilm[0]</div>
             <div className='film-information-left-bottom-flex'>
-            <div className='film-information__element film-information-watched-count'>341</div>
-            <div className='film-information__element film-information-list-count'>431</div>
-            <div className='film-information__element film-information-favourite-count'>12</div>
-            
+        
             </div>
             </div>
 

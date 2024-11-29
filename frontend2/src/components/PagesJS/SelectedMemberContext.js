@@ -23,7 +23,7 @@ export const SelectedMemberProvider = ({ children }) => {
           },
           body: JSON.stringify({ selectedMember }), // Send the selected member
         });
-  
+
         if (!response.ok) {
           throw new Error('Failed to send selected member to backend');
         }
@@ -31,7 +31,7 @@ export const SelectedMemberProvider = ({ children }) => {
         console.error('Error sending selected member:', error);
       }
     };
-  
+
     // Call the function to send data
     sendSelectedMemberToBackend();
   }, [selectedMember]); // Trigger when selectedMember changes
@@ -58,13 +58,12 @@ export const SelectedMemberProvider = ({ children }) => {
       if (targetPath) {
         if (location.pathname === '/films' && targetPath === '/films') {
           // Call the API to refill movies when clicking "films" again
-          setSelectedMember(null); // Reset selected member
-          
-          
+          setSelectedMember(null); // Reset selected member          
         } else if (
           !targetPath.startsWith('/films') &&
           !targetPath.startsWith('/filmonly') &&
-          !targetPath.startsWith('/reviews') // Reset context for navigation to the "reviews" page
+          !targetPath.startsWith('/reviews') &&
+          !targetPath.startsWith('/memberonly') // Do not reset context on memberonly page
         ) {
           // Reset context for navigation to other routes
           setSelectedMember(null);

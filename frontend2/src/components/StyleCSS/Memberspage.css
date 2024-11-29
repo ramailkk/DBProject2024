@@ -82,6 +82,7 @@
     justify-content: center;
     gap: 5px;
     cursor: pointer;
+    border: 2px solid red;
 }
 
 .member-heading-element {
@@ -125,6 +126,7 @@
     width: 25px;
     height: 25px;
     user-select: none;
+    border: 2px solid blue;
 }
 
 .multiple-member-picture {

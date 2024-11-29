@@ -32,7 +32,8 @@ CREATE TABLE Reviews (
     UserID INT,
     MovieID INT,
     UserRating INT CHECK (UserRating BETWEEN 1 AND 10),
-    ReviewDescription CLOB,
+    ReviewDescription VARCHAR2(4000),
+    ReviewDate DATE,
     PRIMARY KEY (UserID, MovieID),
     FOREIGN KEY (UserID) REFERENCES MovieUser(UserID) ON DELETE CASCADE,
     FOREIGN KEY (MovieID) REFERENCES Movie(MovieID) ON DELETE CASCADE

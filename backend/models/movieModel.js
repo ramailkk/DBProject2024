@@ -1,12 +1,41 @@
 const oracledb = require("oracledb");
 
+let selectedMember = null;  // Initially set to null
+var user_table;
+var with_query = ` WITH userTable AS (
+        SELECT M.* FROM LISTMOVIES LM
+        INNER JOIN MOVIE M 
+        ON M.MOVIEID = LM.MOVIEID
+        WHERE USERID = :userID AND LISTID = :listID
+      )
+    `;
+// Function to update the selectedMember (called by the controller)
+const setSelectedMember = (member) => {
+  selectedMember = member;
+};
 async function listAllmovies() {
   let conn;
+
   try {
     conn = await oracledb.getConnection();
-    const result = await conn.execute(`SELECT * FROM Movie`);
+    var result;  
+    // Ensure selectedMemberArray has fallback logic if selectedMember is null
+    if(selectedMember !== null){
+    const selectedMemberArray = selectedMember ? Object.values(selectedMember).slice(0, 2) : [0,0];
+    console.log(selectedMemberArray + " In model");
+    const [userID,listID] = selectedMemberArray;
+    result = await conn.execute(`${with_query} SELECT * FROM userTable`, { userID, listID });
+    }
+    else{
+    result = await conn.execute(`SELECT * FROM MOVIE`);
+    }
+
+    // If no valid userID/listID, make sure query handles it safely
+    
+
     return result.rows;
   } catch (err) {
+    console.error('Error fetching movies:', err);
     throw err;
   } finally {
     if (conn) {
@@ -14,6 +43,7 @@ async function listAllmovies() {
     }
   }
 }
+
 async function listAllgenres() {
   let conn;
   try {
@@ -182,5 +212,9 @@ module.exports = {
   getMoviesByGenre,
   listMoviesByDecade,
   getMoviesByName,
-  listMoviesByRatingRange
+  listMoviesByRatingRange,
+  setSelectedMember,
+  with_query,
+  user_table
+
 };

@@ -1,4 +1,4 @@
-/* General container styling for the review page */
+
 .review-page {
     display: flex;
     justify-content: center;
@@ -8,7 +8,6 @@
     background-color: #f4f4f9;
 }
 
-/* Main container for review items */
 .review-page-container {
     display: flex;
     flex-direction: column;
@@ -23,7 +22,7 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Heading styling */
+
 .review-page-heading {
     font-size: 2rem;
     font-weight: 600;
@@ -32,7 +31,6 @@
     text-align: center;
 }
 
-/* Styling for the review container */
 .review-page-review-container {
     display: flex;
     flex-direction: column;
@@ -40,7 +38,6 @@
     width: 100%;
 }
 
-/* Individual review element styling */
 .review-page-review__element {
     display: flex;
     flex-direction: row;
@@ -54,7 +51,7 @@
     transition: box-shadow 0.3s ease;
 }
 
-/* Poster image styling */
+
 .review-page-review__poster {
     width: 100px;
     height: 150px;
@@ -64,7 +61,7 @@
     flex-shrink: 0;
 }
 
-/* Review details section */
+
 .review-page-review__details {
     display: flex;
     flex-direction: column;
@@ -72,27 +69,26 @@
     flex: 1;
 }
 
-/* Reviewer name styling */
+
 .review-page-review__name {
     font-size: 1.2rem;
     font-weight: 600;
     color: #2c3e50;
 }
 
-/* Review rating styling */
 .review-page-review__rating {
     font-size: 1rem;
     font-weight: 500;
     color: #27ae60;
 }
 
-/* Review date styling */
+
 .review-page-review__date {
     font-size: 0.9rem;
     color: #7f8c8d;
 }
 
-/* Comment section styling */
+
 .review-page-review__comment {
     font-size: 1rem;
     line-height: 1.6;
@@ -103,7 +99,6 @@
     color: #34495e;
 }
 
-/* Container for the criteria selector box */
 .review-page-criteria-selectorbox {
     display: flex;
     justify-content: space-between;
@@ -113,7 +108,7 @@
     margin: 0;
 }
 
-/* Individual selector element */
+
 .review-page-criteria-selectorbox__element {
     display: flex;
     flex-direction: column;
@@ -122,15 +117,12 @@
     position: relative;
 }
 
-/* 'Browse by' text */
 .review-page-browse-by {
     font-size: 1.1rem;
     font-weight: 600;
     color: #333;
     margin: 0;
 }
-
-/* Dropdown button styling */
 .review-page-criteria-dropdown__button {
     background-color: #04AA6D;
     color: white;
@@ -146,13 +138,13 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Arrow icon in the dropdown button */
+
 .review-page-criteria-dropdown__button i.arrow {
     font-size: 1rem;
     margin-left: 8px;
 }
 
-/* Dropdown content styling */
+
 .review-page-age-criteria-dropdown {
     display: none;
     position: absolute;
@@ -167,12 +159,11 @@
     transition: all 0.3s ease;
 }
 
-/* Show dropdown when hovering over the button */
+
 .review-page-criteria-selectorbox__element:hover .review-page-age-criteria-dropdown {
     display: block;
 }
 
-/* Dropdown item styling */
 .review-page-criteria-dropdown__element {
     color: #f5f5f5;
     padding: 0.75rem 1.25rem;
@@ -181,13 +172,13 @@
     border-bottom: 1px solid #444;
 }
 
-/* Hover effect for dropdown items */
+
 .review-page-criteria-dropdown__element:hover {
     background-color: #04AA6D;
     color: white;
 }
 
-/* Responsive design for smaller screens */
+
 @media (max-width: 768px) {
     .review-page-criteria-selectorbox {
         flex-direction: column;
@@ -199,4 +190,4 @@
         width: 100%;
         margin: 0;
     }
-}
+} 

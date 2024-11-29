@@ -10,27 +10,30 @@ import Filmonly from "../PagesJS/Filmonly.js";
 import { FilmProvider } from '../PagesJS/FilmContext.js';
 import { SelectedMemberContext, SelectedMemberProvider } from '../PagesJS/SelectedMemberContext.js';
 import Reviews from "../PagesJS/Reviews.js";
-
+import { AuthProvider }from "../PagesJS/AuthContext.js";
 export default function App() {
   return (
     <div>
-    {/* <FilmProvider>
-    <BrowserRouter>
-    <SelectedMemberProvider>
-            <Routes>
-        <Route path="/" element={<Headerbox />}>
-          <Route index element={<Dashboard />} />
-          <Route path="films" element={<Filmpage />} />
-          <Route path="members" element={<Memberspage />} />
-          <Route path="memberonly" element={<Memberonly />} />
-          <Route path="filmonly" element={<Filmonly />} />
-          <Route path="signup" element={<Signup />} />
-        </Route>
-      </Routes>
-      </SelectedMemberProvider>
-    </BrowserRouter>
-    </FilmProvider> */}
-    <Reviews></Reviews>
+      <FilmProvider>
+        <BrowserRouter>
+        <AuthProvider>
+
+            <SelectedMemberProvider>
+              <Routes>
+                <Route path="/" element={<Headerbox />}>
+                  <Route index element={<Dashboard />} />
+                  <Route path="films" element={<Filmpage />} />
+                  <Route path="members" element={<Memberspage />} />
+                  <Route path="memberonly" element={<Memberonly />} />
+                  <Route path="filmonly" element={<Filmonly />} />
+                  <Route path="signup" element={<Signup />} />
+                  <Route path="reviews" element={<Reviews />} />
+                </Route>
+              </Routes>
+            </SelectedMemberProvider>
+            </AuthProvider>
+        </BrowserRouter>
+      </FilmProvider>
     </div>
   );
 }

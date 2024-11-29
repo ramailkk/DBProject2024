@@ -4,6 +4,8 @@ const express = require("express");
 const movieRoutes = require("./routes/movieRoutes");
 const filmpageRoutes = require("./routes/filmpageRoutes");
 const MembersRoutes = require("./routes/MembersRoutes");
+const reviewRoutes = require("./routes/reviewRoutes");
+const UserRoutes = require("./routes/UserRoutes");
 
 const db = require("./config/db");
 const bodyParser = require("body-parser");
@@ -24,7 +26,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api", movieRoutes);
 app.use("/api", filmpageRoutes);
 app.use("/api", MembersRoutes)
-
+app.use("/api", reviewRoutes);
+app.use("/api", UserRoutes);
 // Catch-all route to verify that the app is running
 app.use("/", (req, res) => {
   res.json({ message: "App is running!" });

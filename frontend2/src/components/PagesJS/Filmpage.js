@@ -28,7 +28,7 @@ useEffect(() => {
 function changeFilmsOnCriteria(get_api,criteria){
   let custom_api = get_api + "" + criteria ;
 
-  fetch(custom_api, {
+(custom_api, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -55,7 +55,8 @@ useEffect(() => {
       setFilms(data.data);
     })
     .catch((error) => console.error("Error fetching search results:", error));
-}, []);
+}, [selectedMember]);
+
 const allfilms = films?.map((item, index) => (
   <Link to={`/filmonly`} key={item[0]}
   onClick={() => setSelectedFilm(item)}

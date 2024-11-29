@@ -7,7 +7,8 @@ const {
   getMoviesByGenre,
   listMoviesByDecade,
   getMoviesByName,
-  listMoviesByRatingRange
+  listMoviesByRatingRange,
+  setSelectedMember
 } = require("../models/movieModel");
 
 // const db = require("../config/db");
@@ -130,6 +131,21 @@ async function getMoviesByRatingRange(req, res) {
   }
 }
 
+async function updateSelectedMember(req, res) {
+  try {
+    const { selectedMember } = req.body; // Extract selectedMember from request body
+    setSelectedMember(selectedMember);
+    
+    // Now, you can use the selectedMember value in your model or any business logic.
+    console.log('Selected Member:', selectedMember);
+
+    res.status(200).json({ message: 'Selected member updated successfully' });
+  } catch (error) {
+    console.error('Error updating selected member:', error);
+    res.status(500).json({ message: 'Failed to update selected member', error: error.message });
+  }
+}
+
 
 module.exports = {
   fetchMoviesByGenre,
@@ -137,5 +153,6 @@ module.exports = {
   getAllgenres,
   getMoviesByDecade,
   getMoviesByNameHandler,
-  getMoviesByRatingRange
+  getMoviesByRatingRange,
+  updateSelectedMember
   };

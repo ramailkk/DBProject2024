@@ -30,10 +30,18 @@ function Memberspage() {
   const { setSelectedMember } = useSelectedMember();
   const navigate = useNavigate();
 
-  const handleSelectMember = (userId,listId) => {
+  const handleSelectMember = (userId,listId,event) => {
+    event.preventDefault();
     setSelectedMember({ userId, listId });
-    navigate('/films');
+    setTimeout(() => {
+      navigate("/films");
+    }, 0);
   };
+  const handleSelectMemberReviews = (userId) => {
+    setSelectedMember({ userId }); // Set the userId in the context as an object
+    navigate('/reviews');
+  };
+
 
 
   const [members, setMembers] = useState([]);
@@ -60,7 +68,7 @@ function Memberspage() {
         <div className="members-page-profile multiple-member-name">
           <span>{item[1]}</span>
         </div>
-        <Link to={"/films"} className="members-page-profile multiple-member-watchedcount"  onClick={() => handleSelectMember(item[0],1)}>
+        <Link to={"/films"} className="members-page-profile multiple-member-watchedcount"  onClick={(event) => handleSelectMember(item[0],1,event)}>
           <div className="members-page-profile-flex__image">
             <img src={eyeImage} alt="Eye" />
           </div>
@@ -74,12 +82,12 @@ function Memberspage() {
           <div className="members-page-profile-flex__content">{item[3]}</div>
         </div>
 
-        <div className="members-page-profile multiple-member-reviewcount">
+        <Link to={"/reviews"} className="members-page-profile multiple-member-reviewcount" onClick={() => handleSelectMemberReviews(item[0])}>
           <div className="members-page-profile-flex__image">
             <img src={reviewImage} alt="Review" />
           </div>
           <div className="members-page-profile-flex__content">{item[4]}</div>
-        </div>
+        </Link>
       </div>
       <hr className="members-page-profile-linebreak" />
     </Link>

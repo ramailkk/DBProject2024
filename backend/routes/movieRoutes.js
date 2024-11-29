@@ -3,7 +3,7 @@ const router = express.Router();
 const movieController = require("../controllers/movieController");
 
 router.get("/movies", movieController.getAllmovies);
-//http://localhost:3001//api/movies
+//http://localhost:3001/api/movies
 router.get("/genres", movieController.getAllgenres);
 // //http://localhost:3001//api/genres
 router.get("/moviegenre",movieController.fetchMoviesByGenre);
@@ -14,7 +14,6 @@ router.get("/moviename", movieController.getMoviesByNameHandler);
 // http://localhost:3001/api/moviename?name=dark
 router.get('/movierating', movieController.getMoviesByRatingRange);
 //http://localhost:3001/api/movierating?rating=6
+router.post('/updateSelectedMember', movieController.updateSelectedMember);
 
-
-
-module.exports = router;
+module.exports = router;

@@ -6,7 +6,6 @@
 
 .film-information-container {
     position: relative;
-    border: 2px solid red;
     max-width: 1200px; /* Adjusted for a more standard container size */
     margin: 0 auto;
     padding: 20px; /* Added padding for spacing inside the container */
@@ -14,7 +13,7 @@
 
 .film-information__element {
     display: inline-block;
-    border: 1px solid black;
+    border: 1px solid white;
     flex-shrink: 0;
     flex-grow: 0;
     padding: 10px; /* Added spacing for better separation */
@@ -58,7 +57,6 @@
     font-size: 1rem;
     line-height: 1.5;
     overflow-y: auto; /* Ensures scrolling for long descriptions */
-    /* background-color: #f8f8f8; Added light background for contrast */
 }
 
 .film-information-three-row-structure-flex {
@@ -69,7 +67,6 @@
     margin-top: 40px;
     gap: 20px; /* Added consistent gap */
 }
-
 
 .film-information__ratings {
     text-align: center;
@@ -99,12 +96,10 @@
     gap: 15px;
 }
 
-
 .film-information-bottom-desc-flex {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border: 2px solid red;
     margin-top: 20px; /* Added spacing from above */
     padding: 10px; /* Added padding for better spacing */
 }
@@ -123,58 +118,89 @@
 
 .choice-desc {
     width: 450px; /* Adjusted size for balance */
-    border: 2px solid red;
     padding: 10px;
 }
 
 .film-information-desc-category {
     width: 100%; /* Full width for flexibility */
-    border: 2px solid red;
     text-transform: capitalize;
-    display: flex;
-    flex-direction: row;
-    gap: 15px; /* Increased gap for spacing */
-    flex-wrap: wrap;
+    display: grid; /* Applying grid layout */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Automatically adjusts columns based on content */
+    gap: 20px; /* Space between the grid items */
+    padding: 10px;
     padding: 10px; /* Added padding for spacing */
 }
 
 .film-information-desc-category__child {
-    border: 2px solid darkblue;
     padding: 5px;
     font-size: 1rem;
     text-align: center;
     min-width: 80px; /* Added minimum size for consistency */
     flex-grow: 1; /* Ensures equal distribution */
+    border: 1px solid #ccc; /* Border added for better visibility */
+    margin: 5px; /* Space between items */
+    transition: background-color 0.3s ease-in-out; /* Added hover effect */
 }
 
-.film-information-right-flex{
+.film-information-desc-category__child:hover {
+    background-color: #ddd; /* Hover effect */
+}
+
+.film-information-right-flex {
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 10px;
 }
-.film-information__log-options{
+
+.film-information__log-options {
     width: 300px;
-    height: 200px;
+    height: 250px; /* Increased height for better space allocation */
+    background-color: #2a2a2a; /* Dark background to match the overall theme */
+    border-radius: 10px; /* Smooth corners for a modern look */
+    padding: 20px; /* Padding for spacing inside the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Added subtle shadow for emphasis */
 }
 
-.film-information-log-options__logout{
+.film-information-log-options__logout {
     position: relative;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    background-color: #ff4d4d; /* Red for logout to stand out */
+    color: white; /* White text for contrast */
+    padding: 0.8rem 1.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
 }
-.film-information-log-options__login{
+
+.film-information-log-options__logout:hover {
+    background-color: #e60000; /* Darker red on hover */
+}
+
+.film-information-log-options__login {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 3px;
+    gap: 15px;
 }
-.film-information-login__element{
-    background-color: maroon;
-    width: 300px;
+
+.film-information-login__element {
+    background-color: #333; /* Green for login to match the positive action theme */
+    color: white;
+    width: 80%;
     text-align: center;
-    padding: 0.5rem 0;
+    /* padding: 0.8rem; */
+    font-size: 1.2rem;
+    border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.film-information-login__element:hover {
+    background-color: #45a049; /* Darker green on hover */
 }

@@ -17,7 +17,6 @@ export default function App() {
       <FilmProvider>
         <BrowserRouter>
         <AuthProvider>
-
             <SelectedMemberProvider>
               <Routes>
                 <Route path="/" element={<Headerbox />}>
@@ -31,7 +30,7 @@ export default function App() {
                 </Route>
               </Routes>
             </SelectedMemberProvider>
-            </AuthProvider>
+          </AuthProvider>
         </BrowserRouter>
       </FilmProvider>
     </div>

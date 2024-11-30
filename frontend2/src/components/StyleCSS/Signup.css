@@ -1,55 +1,101 @@
-    *{
-        box-sizing: border-box;
-        padding: 0;
-        margin: 0;
-    }
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+  }
+  
+  body {
+    background: radial-gradient(circle, rgba(5,1,3,1) 0%, rgba(50,50,50,1) 100%);
+    color: #e4e4e4;
+    font-family : Arial, sans-serif;
+  }
 
-    form label {
-        display: block;
-    }
-    .signup-block{
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%,-50%);
-        padding: 100px;
-        border: 2px solid red;
-        border-radius: 3%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-        width: 500px;
-    }
-
-    .signup-form-element input{
-        height: 30px;
-        width: 250px;
-    }
-
-
-
-    .submit-button{
-        padding: 10px 30px;
-        border-radius: 5%;
-        cursor: pointer;
-        user-select: none;
-    }
-    .signup-form{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-    }
-    .signup-exit-to-home{
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        font-size: 20px;
-        background-color: red;
-        border-radius: 100%;
-        padding: 2px 10px;
-        color: white;
-        cursor: pointer;
-        text-decoration: none;
-    }           
+  .signup-all{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+  
+  .signup-block {
+    position: relative;
+    /* left: 50%; */
+    /* bottom: 50%; */
+    transform: translate(0, 20%);
+    padding: 40px;
+    border-radius: 12px;
+    background-color: #333; /* Dark background similar to film page */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .signup-element {
+    font-size: 1.5rem;
+    color: #f5f5f5; /* Light text color */
+  }
+  
+  .signup-form-element input {
+    height: 40px;
+    width: 300px;
+    padding: 0 10px;
+    border-radius: 8px;
+    border: 1px solid #555; /* Dark border for input fields */
+    background-color: #222; /* Dark input background */
+    color: #e4e4e4; /* Light text inside input fields */
+    font-size: 1rem;
+  }
+  
+  .signup-form-element input:focus {
+    outline: none;
+    border: 1px solid #aaa; /* Lighter border on focus */
+  }
+  
+  .signup-form-element label {
+    font-size: 1rem;
+    color: #f5f5f5; /* Label text color */
+  }
+  
+  .submit-button {
+    padding: 12px 40px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #444; /* Dark button background */
+    color: #f5f5f5;
+    border: none;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-button:hover {
+    background-color: #555; /* Lighter button hover color */
+  }
+  
+  .signup-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .signup-exit-to-home {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 20px;
+    background-color: #e74c3c; /* Red exit button */
+    border-radius: 50%;
+    padding: 5px 10px;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .signup-exit-to-home:hover {
+    background-color: #c0392b; /* Darker red on hover */
+  }
+  

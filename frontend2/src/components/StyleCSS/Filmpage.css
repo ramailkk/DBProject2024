@@ -5,168 +5,150 @@
   text-decoration: none;
 }
 
-/* body {
-  background: radial-gradient(circle, rgba(5,1,3,1) 0%, rgba(111,4,7,1) 100%);
+body {
+  background: radial-gradient(circle, rgba(5,1,3,1) 0%, rgba(50,50,50,1) 100%);
   color: #e4e4e4;
   font-family: Arial, sans-serif;
-} */
+}
 
 .film-page-outer-container {
   width: 90%;
   max-width: 1200px;
   margin: 2rem auto;
   padding: 2rem;
-  background-color: #2a2b2d; 
   border-radius: 12px;
   text-align: center;
+  background-color: transparent;
 }
 
 .film-page-outer-heading {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   color: #f5f5f5;
-  font-size: 2.2rem;
-  font-weight: 700;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 .film-page-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(5, 200px); /* Always 5 columns with a fixed width */
+  gap: 1rem;
+  justify-content: center;
   margin-top: 1.5rem;
 }
 
 .film-page__child {
   background-color: #333;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  transition: transform 0.3s ease-in-out;
-  width: 100%; /* Ensure responsiveness */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
   height: 300px;
 }
 
 .film-page__child:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .film-card {
   padding: 1rem;
+  color: #e4e4e4;
 }
 
 .film-card__title {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   margin-bottom: 0.5rem;
-  color: #f5f5f5;
 }
 
 .film-card__info {
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #ccc;
 }
 
 .film-page-criteria-selectorbox {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
   align-items: center;
-  padding: 1rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap; /* Allow wrapping for smaller screens */
-  gap: 1rem;
-}
-
-.film-page-browse-by {
-  font-size: 1.2rem;
-  margin-right: 20px;
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 10px;
 }
 
 .film-page-criteria-selectorbox__element {
-  font-size: 1.25rem;
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center; /* Aligning label and input/buttons in a row */
+  position: relative; /* Ensures dropdown is positioned correctly under the button */
 }
 
 .film-page-search {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
+  margin-right: 20px; /* Ensure space between the label and input */
+  gap: 10px;
 }
 
-.film-page-search-bar {
-  padding: 0.75rem 1rem;
-  border: 1px solid #666;
-  border-radius: 6px;
-  font-size: 1.1rem;
-  background-color: #2c2f32;
-  color: #fff;
+.film-page-criteria-selectorbox__element film_page-find-film {
+  margin-right: 10px; /* Ensure space between label and input */
 }
 
 .film-page-criteria-dropdown__button {
-  background-color: #04AA6D;
-  color: white;   
+  background-color: #444;
+  color: #f5f5f5;
   border: none;
-  padding: 0.75rem 1rem;
-  border-radius: 6px;
-  font-size: 1rem;
+  padding: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+  border-radius: 8px;
+  text-align: center;
+  width: auto; /* Fixed width for dropdowns */
+  font-size: 1rem;
+  position: relative; /* Ensures the button is the reference point for dropdown */
+
+}
+
+.film-page-criteria-dropdown__button:hover {
+  background-color: #555;
 }
 
 .film-age-criteria-dropdown {
   display: none;
-  position: absolute;
   background-color: #333;
+  /* padding: 1rem; */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 100%; /* Ensures the dropdown is positioned directly below the button */
+  left: 0;
   z-index: 1;
-  border-radius: 4px;
-  transition: all 0.3s ease;
+  width: auto; /* Same fixed width for dropdown content */
 }
 
-.film-page-criteria-selectorbox__element:hover .film-age-criteria-dropdown {
+.film-page-criteria-dropdown__button:hover + .film-age-criteria-dropdown,
+.film-age-criteria-dropdown:hover {
   display: block;
 }
 
 .film-page-criteria-dropdown__element {
+  padding: 0.5rem 1rem;
   color: #f5f5f5;
-  padding: 0.4rem 0.85rem;
-  text-decoration: none;
-  display: block;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease;
 }
 
 .film-page-criteria-dropdown__element:hover {
-  background-color: #04AA6D;
-  color: #fff;
+  background-color: #444;
 }
 
-@media (max-width: 768px) {
-  .film-page-container {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  }
-
-  .film-page-search-bar {
-    width: 100%;
-  }
-
-  .film-page-criteria-selectorbox {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .film-page-browse-by {
-    margin-right: 0;
-    text-align: center;
-  }
+.film-page-search-bar {
+  padding: 0.5rem;
+  font-size: 1rem;
+  width: 200px; /* Fixed width for the search bar */
+  border-radius: 8px;
+  border: 1px solid #555;
+  background-color: #222;
+  color: #f5f5f5;
 }
 
-.down {
-  transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-}
-
-.arrow {
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  display: inline-block;
-  padding: 2px;
-  margin-bottom: 2px;
+.film-page-search-bar:focus {
+  outline: none;
+  border: 1px solid #aaa;
 }

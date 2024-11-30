@@ -94,7 +94,14 @@ function Reviews() {
         <div className="review-page-review__details">
           <div className="review-page-review__name">{review[0]}</div>
           <div className="review-page-review__rating">Rating: {review[3]}/5</div>
-          <div className="review-page-review__date">Reviewed on: {review[2]}</div>
+          <div className="review-page-review__date">
+    Reviewed on: {new Date(review[2]).toLocaleDateString('en-US', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    })}
+</div>
+
           <div className="review-page-review__comment">{review[1]}</div>
         </div>
       </div>
@@ -104,7 +111,7 @@ function Reviews() {
   return (  
     <div className="review-page">
       <div className="review-page-container">
-        <div className="review-page-heading">Reviews of this person</div>
+        <div className="review-page-heading">Reviews of Insert name of User ID {selectedMember.userId}</div>
 
         <form className="review-page-criteria-selectorbox">
           <div className="review-page-criteria-selectorbox__element">

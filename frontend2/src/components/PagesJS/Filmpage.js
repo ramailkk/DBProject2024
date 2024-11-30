@@ -25,22 +25,30 @@ useEffect(() => {
 
 
 
-function changeFilmsOnCriteria(get_api,criteria){
-  let custom_api = get_api + "" + criteria ;
-
-(custom_api, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      setFilms(data.data);
+  function changeFilmsOnCriteria(get_api, criteria) {
+    // Construct the API URL
+    let custom_api = get_api + "" + criteria;
+  
+    // Make the fetch request
+    fetch(custom_api, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
-    .catch((error) => console.error("Error fetching search results:", error));
-}  
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        setFilms(data.data); // Assuming setFilms is defined elsewhere
+      })
+      .catch((error) => console.error("Error fetching search results:", error));
+  }
+    
 
 useEffect(() => {
   fetch(`http://localhost:3001/api/movies/`, {
@@ -190,7 +198,7 @@ function renderCurrentUserList(selectedMember){
   const { userId, listId } = selectedMember;
   
   return(
-<div>{userId + " " + listId }</div>
+<div className="film-information-page">Insert Name of USERID  {userId} AND ListName of listID {listId} </div>
   )
 }
 }

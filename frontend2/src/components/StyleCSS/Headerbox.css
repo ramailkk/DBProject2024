@@ -1,42 +1,109 @@
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-.headerbox{
+.headerbox {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
     width: 100%;
     height: 50px;
-    border: 2px solid red;
+    background-color: #333;  /* Dark background for the header */
 }
-.logo{
-    font-size: 30px;
+
+.headerboxcomponent {
+    cursor: pointer;
+    font-size: 18px;
+    color: white;  /* Ensure the text is visible on dark background */
+    text-decoration: none;
+    padding: 10px;
+    transition: color 0.3s ease;
 }
-.header-links{
+
+.headerboxcomponent:hover {
+    color: #ff6347; /* Slight hover effect */
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.header-links {
     display: flex;
     flex-direction: row;
-    font-size: 20px;
-    gap: 30px;
+    font-size: 16px;
+    gap: 20px;
 }
-.login-block{
+
+.login-block {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 15px;
     align-items: center;
+    padding: 5px;
 }
-.login-submit{
+
+.login-block label {
+    font-size: 16px;
+    color: #ccc;
+    margin-right: 8px;
+}
+
+.login-block input {
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;  /* Removed border */
+    background-color: #f0f0f0;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.login-block input:focus {
+    background-color: #e0e0e0;  /* Slight focus effect */
+    outline: none;
+}
+
+.login-submit {
     cursor: pointer;
-    padding: 0 10px;
-}
-.login-exit-to-logout{
-    background-color: red;
-    border-radius: 10%;
-    padding: 5px 10px;
+    padding: 8px 20px;
+    background-color: #4caf50;  /* Green for the submit button */
     color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.login-submit:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+.login-exit-to-logout {
+    background-color: #ff6347;  /* Red for the close button */
+    color: white;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 50%;
     cursor: pointer;
-    text-decoration: none;   
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.login-exit-to-logout:hover {
+    background-color: #e55347; /* Darker red on hover */
+}
+
+.signup-link {
+    color: #4caf50;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.signup-link:hover {
+    text-decoration: underline;
 }

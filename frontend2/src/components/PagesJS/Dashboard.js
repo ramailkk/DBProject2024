@@ -12,21 +12,21 @@ function Dashboard() {
         ));
     }
 
-    return(<div>
+    return(<div className='dashboard-all'>
     <div className='dashboard-grid'>
 
         {/* Popular Movies Grid */}
-        <h1 className='dashboard-grid-heading'>popular</h1>
+        <h1 className='dashboard-grid-heading'>Popular</h1>
         <hr className='dashboard-grid-headingline'></hr>
         <div className='dashboard-grid-category popular-movies'>{getgridMovies(popularMovies)}</div>
 
         {/* Recent Movies Grid */}
-        <h1 className='dashboard-grid-heading'>new movies</h1>
+        <h1 className='dashboard-grid-heading'>New movies</h1>
         <hr className='dashboard-grid-headingline'></hr>
         <div className='dashboard-grid-category recent-movies'>{getgridMovies(newMovies)}</div>
         
         {/* Suggested Movies Grid */}
-        <h1 className='dashboard-grid-heading'>suggested</h1>
+        <h1 className='dashboard-grid-heading'>Suggested</h1>
         <hr className='dashboard-grid-headingline'></hr>
         <div className='dashboard-grid-category suggested-movies'>{getgridMovies(suggestedMovies)}</div>
     </div>

@@ -70,11 +70,13 @@ function Memberspage() {
 
     <Link key={item[0]}>
       <div className="members-page__element">
-        <Link img to={"/memberonly"} onClick={() => handleSelectMemberOnly(item[0])}><img  src={sampleAvatar} className="members-page-profile multiple-member-picture" alt="Avatar"  />
+        <Link  to= {"/memberonly"}onClick={() => handleSelectMemberOnly(item[0])}><img  src={sampleAvatar} className="members-page-profile multiple-member-picture" alt="Avatar"  />
         </Link>
-        <Link to={"/memberonly"}className="members-page-profile multiple-member-name" onClick={() => handleSelectMemberOnly(item[0])}>
-          <span>{item[1]}</span>
+
+        <Link  to= {"/memberonly"}onClick={() => handleSelectMemberOnly(item[0])} className="members-page-profile "><div>{item[1]}</div>
         </Link>
+
+
         <Link to={"/films"} className="members-page-profile multiple-member-watchedcount"  onClick={(event) => handleSelectMemberLists(item[0],1,event)}>
           <div className="members-page-profile-flex__image">
             <img src={eyeImage} alt="Eye" />

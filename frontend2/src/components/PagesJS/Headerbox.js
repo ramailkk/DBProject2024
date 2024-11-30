@@ -1,13 +1,14 @@
-import React, { createContext, useContext, useState } from 'react';
-
+import React, { createContext, useContext, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import "../StyleCSS/Headerbox.css";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, Navigate } from "react-router-dom";
 import {useAuth} from './AuthContext.js';
 
+import { useSelectedMember } from "./SelectedMemberContext";
 
 
 function Headerbox() {
-    
+
   const [tab, setTab] = useState("logout");
   return (
     <div>
@@ -25,6 +26,8 @@ function Headerbox() {
     </div>
   );
 }
+
+
 
 function Logging({ setTab }) {
     const { login } = useAuth();  // Get the login function from context
@@ -140,12 +143,18 @@ function LogOut(setTab) {
 
 function LogIn(setTab) {
 
-
+const { setSelectedMember } = useSelectedMember();
 const { user } = useAuth();  // Get the login function from context
+
+const handleSelectMemberOnly = (userId) => {
+  setSelectedMember({ userId }); // Set the userId in the context as an object
+  console.log(userId);
+};
   return (
+    
     <div className="header-links">
-      <Link to="/memberonly" className="headerboxcomponent">
-      {user.username}
+      <Link to={"/memberonly"} onClick = {() => handleSelectMemberOnly(user.id)}className="headerboxcomponent" >
+      {user.username}  
           </Link>
       <Link to="/films" className="headerboxcomponent">Films</Link>
       <Link to="/members" className="headerboxcomponent">Members</Link>

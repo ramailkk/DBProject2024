@@ -3,7 +3,6 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    color: black;
 }
 
 /* Pagination Container */
@@ -60,8 +59,8 @@
     flex-direction: column;
     align-items: center;
     width: 800px;
-    border: 2px solid red;
     gap: 10px;
+    font-family: 'Arial', sans-serif; /* Professional font family */
 }
 
 /* Members Page Elements */
@@ -72,8 +71,12 @@
     flex-direction: row;
     justify-content: left;
     align-items: center;
+    font-size: 14px; /* Consistent text size */
+    color: #343a40; /* Neutral text color for readability */
+    margin: 5px 0px;
 }
 
+/* Profile Section */
 .members-page-profile {
     margin: 0 20px;
     flex: 1;
@@ -83,55 +86,74 @@
     justify-content: center;
     gap: 5px;
     cursor: pointer;
-    border: 2px solid red;
+    color: #343a40; /* Accent color for links or interactive text */
+    text-decoration: none;
+    font-weight: 500; /* Medium weight for better balance */
 }
 
+/* Member Heading */
 .member-heading-element {
     height: 30px;
     margin-top: 10px;
+    font-size: 18px; /* Larger font size for headings */
+    font-weight: bold;
+    color: #495057; /* Slightly darker tone for emphasis */
 }
 
+/* Column Titles */
 .members-page-columns {
     font-weight: bold;
+    font-size: 14px;
+    color: #6c757d; /* Muted text color for secondary emphasis */
     pointer-events: none;
 }
 
+/* Member Name */
 .multiple-member-name {
     pointer-events: none;
+    font-size: 14px;
+    color: #343a40;
 }
 
-.members-page-profile span {
-    pointer-events: auto;
-}
-
+/* Empty Heading */
 .member-empty-heading {
     cursor: auto;
     flex: 1.3;
+    font-size: 14px;
+    color: #adb5bd; /* Muted color for inactive text */
 }
 
+/* Member Picture */
 .multiple-member-picture {
     flex: 1.3;
+    height: 75px;
+    width: 75px;
+    border-radius: 50%;
+    overflow: hidden;
+    font-size: 14px;
+    color: #495057;
 }
 
-.multiple-member-name {
-    flex: 2;
-}
-
+/* Profile Line Break */
 .members-page-profile-linebreak {
     width: 600px;
 }
 
+/* Profile Image */
 .members-page-profile-flex__image img {
     position: relative;
     top: 3px;
     width: 25px;
     height: 25px;
     user-select: none;
-    border: 2px solid blue;
+    border-radius: 50%;
+    border: none; /* Removed border */
 }
 
-.multiple-member-picture {
-    height: 75px;
-    width: 75px;
-    border-radius: 100%;
+/* General Text Adjustments */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.5;
+    font-size: 14px;
+    color: #212529; /* Standardized base text color */
 }

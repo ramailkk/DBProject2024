@@ -62,11 +62,16 @@ async function getMoviesByGenre(genreID) {
   let conn;
   try {
     conn = await oracledb.getConnection();
+
+    // Define the base table name based on the selected member
+    let table = selectedMember ? "UserTable" : "Movie";
+
+    // Construct the query dynamically with the correct table name
     const query = `
       SELECT 
         m.MovieID, m.Title, m.ReleaseDate, m.Description, g.GenreType 
       FROM 
-        Movie m
+        ${table} m
       JOIN 
         MovieGenre mg ON m.MovieID = mg.MovieID
       JOIN 
@@ -74,16 +79,29 @@ async function getMoviesByGenre(genreID) {
       WHERE 
         g.GenreID = :genreID
     `;
-    const result = await conn.execute(query, [genreID]);
+
+    let result;
+    if (selectedMember) {
+      const selectedMemberArray = Object.values(selectedMember).slice(0, 2);
+      console.log(selectedMemberArray + " In model");
+      const [userID, listID] = selectedMemberArray;
+      result = await conn.execute(`${with_query}${query}`, { userID, listID, genreID });
+    } 
+    else {
+      result = await conn.execute(query, { genreID });
+    }
+
     return result.rows;
   } catch (err) {
-    throw err;
+    console.error("Error in getMoviesByGenre:", err);
+    throw new Error("Failed to fetch movies by genre.");
   } finally {
     if (conn) {
       await conn.close();
     }
   }
 }
+
 async function listMoviesByDecade(decade) {
   let conn;
   try {
@@ -91,14 +109,25 @@ async function listMoviesByDecade(decade) {
     // Get the range for the given decade
     const startYear = parseInt(decade, 10);
     const endYear = startYear + 9;
+    let table = selectedMember ? "UserTable" : "Movie";
 
     const query = `
       SELECT * 
-      FROM Movie
+      FROM ${table}
       WHERE EXTRACT(YEAR FROM ReleaseDate) BETWEEN :startYear AND :endYear
     `;
 
-    const result = await conn.execute(query, { startYear, endYear });
+    let result;
+    if (selectedMember) {
+      const selectedMemberArray = Object.values(selectedMember).slice(0, 2);
+      console.log(selectedMemberArray + " In model");
+      const [userID, listID] = selectedMemberArray;
+      result = await conn.execute(`${with_query}${query}`, { userID, listID, startYear, endYear });
+    } 
+    else {
+      result = await conn.execute(query, { startYear, endYear });
+    }
+
     return result.rows;
   } catch (err) {
     throw err;
@@ -125,11 +154,11 @@ async function getMoviesByName(name) {
 
     // Ensure the name is trimmed of excess spaces
     const trimmedName = name.trim();
+    let table = selectedMember ? "UserTable" : "Movie";
 
     // SQL query to search movies by name, allowing partial matches anywhere in the title
-    const result = await conn.execute(
-      `SELECT * 
-       FROM Movie 
+    let query = `SELECT * 
+       FROM ${table} 
        WHERE UPPER(Title) LIKE UPPER('%' || :name || '%') 
        ORDER BY 
          CASE 
@@ -137,11 +166,18 @@ async function getMoviesByName(name) {
            WHEN UPPER(Title) LIKE UPPER(:name || '%') THEN 2  -- Starts with name
            WHEN UPPER(Title) LIKE UPPER('%' || :name || '%') THEN 3  -- Contains name anywhere
            ELSE 4
-         END`,
-      {
-        name: `${trimmedName}%`  // Pass the parameter for wildcards
-      }
-    );
+         END`;
+
+
+    if (selectedMember) {
+      const selectedMemberArray = Object.values(selectedMember).slice(0, 2);
+      console.log(selectedMemberArray + " In model");
+      const [userID, listID] = selectedMemberArray;
+      // Include userID and listID as part of the bind parameters
+      result = await conn.execute(`${with_query}${query}`, {userID, listID, name:`${trimmedName}%`});
+    } else {
+      result = await conn.execute(query, {name: `${trimmedName}%`});
+    }
 
     // Ensure that result.rows is not null or empty
     // if (!result.rows || result.rows.length === 0) {
@@ -171,18 +207,19 @@ async function listMoviesByRatingRange(rating) {
 
     let query = '';
     let params = {};
-
+    let table = selectedMember ? "UserTable" : "Movie";
+    
     if (rating === 6) {
       // Fetch highest rated movies
-      query = `SELECT * FROM movie ORDER BY AVERAGERATING DESC`;
+      query = `SELECT * FROM ${table} ORDER BY AVERAGERATING DESC`;
     } else if (rating === 0) {
       // Fetch lowest rated movies
-      query = `SELECT * FROM movie ORDER BY AVERAGERATING ASC`;
+      query = `SELECT * FROM ${table} ORDER BY AVERAGERATING ASC`;
     } else {
       // Rating ranges (e.g., 5 -> 5-4, 4 -> 4-3, etc.)
       query = `
         SELECT * 
-        FROM movie 
+        FROM ${table}
         WHERE AVERAGERATING <= :rangeStart AND AVERAGERATING > :rangeEnd 
         ORDER BY AVERAGERATING DESC
       `;
@@ -190,7 +227,17 @@ async function listMoviesByRatingRange(rating) {
       params.rangeEnd = rating - 1;
     }
 
-    const result = await conn.execute(query, params);
+    let result;
+    if (selectedMember) {
+      const selectedMemberArray = Object.values(selectedMember).slice(0, 2);
+      console.log(selectedMemberArray + " In model");
+      const [userID, listID] = selectedMemberArray;
+      // Include userID and listID as part of the bind parameters
+      result = await conn.execute(`${with_query}${query}`, {userID, listID,...params});
+    } else {
+      result = await conn.execute(query, params);
+    }
+
     return result.rows;
   } catch (err) {
     console.error('Error fetching movies by rating range:', err.message);
@@ -205,6 +252,7 @@ async function listMoviesByRatingRange(rating) {
     }
   }
 }
+
 
 module.exports = {
   listAllmovies,

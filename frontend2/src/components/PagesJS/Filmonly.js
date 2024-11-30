@@ -17,7 +17,7 @@ useEffect(() => {
 }, []);
 
 
-    const { selectedFilm } = useFilm();
+    const {selectedFilm} = useFilm();
 
     const [choice_desc, setChoice_desc] = useState('actors');
 
@@ -70,7 +70,7 @@ useEffect(() => {
             
             {/* Left Side: Picture + 3 elements below it */}
             <div className='film-information-left-flex'>
-            <div className='film-information__element film-information-picture' >selectedFilm[0]</div>
+            <div className='film-information__element film-information-picture' >{selectedFilm[0]}</div>
             <div className='film-information-left-bottom-flex'>
         
             </div>
@@ -97,7 +97,6 @@ useEffect(() => {
 
                 <div className='film-information__element film-information__ratings'>
                     <h3>Rating</h3>
-                    <hr></hr>
                     <div>{selectedFilm[4]}</div>
                 </div>
             </div>
@@ -134,7 +133,6 @@ function renderLogOptions(currentLogStatus){
                     <div className='film-information-login__element film-information-login-watchlist'>Add to Watchlist</div>
                     <div className='film-information-login__element film-information-login-watchlist'>Add to Favorites</div>
                     <div className='film-information-login__element film-information-login-watchlist'>Add a Review</div>
-                    <div className='film-information-login__element film-information-login-watchlist'>Add to Lists?</div>
             </div>
                 )
     }

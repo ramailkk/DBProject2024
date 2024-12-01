@@ -49,6 +49,7 @@
     width: 300px; /* Slightly larger for better visual impact */
     height: 400px; /* Adjusted proportionally */
     object-fit: cover; /* Ensures the image looks good */
+    border-radius: 5px;
 }
 
 .film-information-description {
@@ -74,7 +75,7 @@
     font-size: 1.2rem;
     line-height: 2rem;
     padding: 5px;
-    border: 1px solid gray; /* Added border for clarity */
+    /* border: 1px solid gray; Added border for clarity */
 }
 
 .film-information-left-flex {
@@ -137,7 +138,7 @@
     text-align: center;
     min-width: 80px; /* Added minimum size for consistency */
     flex-grow: 1; /* Ensures equal distribution */
-    border: 1px solid #ccc; /* Border added for better visibility */
+    /* border: 1px solid #ccc; Border added for better visibility */
     margin: 5px; /* Space between items */
     transition: background-color 0.3s ease-in-out; /* Added hover effect */
 }

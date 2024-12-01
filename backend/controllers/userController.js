@@ -22,7 +22,7 @@ const {
     try {
       // Validate request body against the database schema requirements
       const UserData = req.body;
-
+      console.log(UserData)
       // Call model function to add new passenger to the database
       await addNewUser(UserData);
       res.status(201).json({ message: "User added successfully" });

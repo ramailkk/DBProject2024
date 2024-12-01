@@ -28,9 +28,9 @@ useEffect(() => {
     const [actors, setActors] = useState([]);
     const [directors, setDirectors] = useState([]);
     
-    fetchDescriptionOption('http://localhost:3001/api/filmpagegenres?', `id=${selectedFilm[0]}`, setGenres)
-    fetchDescriptionOption('http://localhost:3001/api/filmpageactors?', `id=${selectedFilm[0]}`, setActors)
-    fetchDescriptionOption('http://localhost:3001/api/filmpagedirectors?', `id=${selectedFilm[0]}`, setDirectors)
+    fetchDescriptionOption('http://localhost:3001/api/filmpagegenres?', `id=${selectedFilm.movieID}`, setGenres)
+    fetchDescriptionOption('http://localhost:3001/api/filmpageactors?', `id=${selectedFilm.movieID}`, setActors)
+    fetchDescriptionOption('http://localhost:3001/api/filmpagedirectors?', `id=${selectedFilm.movieID}`, setDirectors)
     const arrays = {
         directors,
         actors,
@@ -58,8 +58,8 @@ useEffect(() => {
                     <div className='film-information-container'> 
             
             <div className='film-information__element film-information-title'>
-                <p className='film-information-title__element title-name'>{selectedFilm[1]}</p>
-                <p className='film-information-title__element title-year'>{new Date(selectedFilm[2]).getFullYear()}</p>
+                <p className='film-information-title__element title-name'>{selectedFilm.title}</p>
+                <p className='film-information-title__element title-year'>{new Date(selectedFilm.releaseDate).getFullYear()}</p>
                 <p className='film-information-title__element title-directed-by'>Directed by</p>
                 <p className='film-information-title__element title-director'>{directors[0]}</p>
             </div>
@@ -70,7 +70,17 @@ useEffect(() => {
             
             {/* Left Side: Picture + 3 elements below it */}
             <div className='film-information-left-flex'>
-            <div className='film-information__element film-information-picture' >{selectedFilm[0]}</div>
+            <div className='film-information__element film-information-picture' style={{
+        backgroundImage: `url(data:image/jpeg;base64,${selectedFilm.moviePicture})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        height: '500px',  // Adjust height as needed
+        width: '350px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        textDecoration: 'none'
+      }}></div>
             <div className='film-information-left-bottom-flex'>
         
             </div>
@@ -79,7 +89,7 @@ useEffect(() => {
             {/* Middle: Description + 3 info elements below it*/}
             
             <div className='film-information-middle-flex'>
-            <div className='film-information__element film-information-description'>{selectedFilm[3]}</div>
+            <div className='film-information__element film-information-description'>{selectedFilm.description}</div>
             <div className='film-information-bottom-desc-flex'>
                 <div className='bottom-desc__element film-information__cast' onClick={() => setChoice_desc('actors')}>Cast</div>
                 <div className='bottom-desc__element film-information__director' onClick={() => setChoice_desc('directors')}>Directors</div>
@@ -97,7 +107,7 @@ useEffect(() => {
 
                 <div className='film-information__element film-information__ratings'>
                     <h3>Rating</h3>
-                    <div>{selectedFilm[4]}</div>
+                    <div>{selectedFilm.averageRating}</div>
                 </div>
             </div>
             </div>

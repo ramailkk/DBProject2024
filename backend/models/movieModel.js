@@ -18,22 +18,60 @@ async function listAllmovies() {
 
   try {
     conn = await oracledb.getConnection();
-    var result;  
-    // Ensure selectedMemberArray has fallback logic if selectedMember is null
-    if(selectedMember !== null){
-    const selectedMemberArray = selectedMember ? Object.values(selectedMember).slice(0, 2) : [0,0];
-    console.log(selectedMemberArray + " In model");
-    const [userID,listID] = selectedMemberArray;
-    result = await conn.execute(`${with_query} SELECT * FROM userTable`, { userID, listID });
-    }
-    else{
-    result = await conn.execute(`SELECT * FROM MOVIE`);
+
+    let result;
+  
+
+    if (selectedMember !== null) {
+      const selectedMemberArray = selectedMember ? Object.values(selectedMember).slice(0, 2) : [0, 0];
+      console.log(selectedMemberArray + " In model");
+      const [userID, listID] = selectedMemberArray;
+
+      result = await conn.execute(`${with_query} SELECT MOVIEID, TITLE, RELEASEDATE, DESCRIPTION, AVERAGERATING, MOVIE_PICTURE  FROM userTable`, { userID, listID });
+    } else {
+      result = await conn.execute(`
+        SELECT MOVIEID, TITLE, RELEASEDATE, DESCRIPTION, AVERAGERATING, MOVIE_PICTURE 
+        FROM MOVIE
+      `,);
     }
 
-    // If no valid userID/listID, make sure query handles it safely
-    
+    const moviePromises = result.rows.map(async (row) => {
+      const [movieID, title, releaseDate, description, averageRating, moviePicture] = row;
 
-    return result.rows;
+      // Default to null if the moviePicture is not available
+      let imageBase64 = null;
+
+      if (moviePicture && moviePicture.getData) {
+        try {
+          // Retrieve the BLOB data asynchronously
+          const buffer = await new Promise((resolve, reject) => {
+            moviePicture.getData((err, data) => {
+              if (err) reject(err);
+              else resolve(data);
+            });
+          });
+
+          imageBase64 = buffer.toString('base64'); // Convert BLOB to Base64
+        } catch (err) {
+          console.error('Error converting BLOB to Base64:', err);
+        }
+      }
+
+      return {
+        movieID,
+        title,
+        releaseDate,
+        description,
+        averageRating,
+        moviePicture: imageBase64,
+      };
+    });
+
+    // Wait for all movie promises to resolve, including image processing
+    const movies = await Promise.all(moviePromises);
+
+    return movies;
+
   } catch (err) {
     console.error('Error fetching movies:', err);
     throw err;
@@ -43,6 +81,9 @@ async function listAllmovies() {
     }
   }
 }
+
+
+
 
 async function listAllgenres() {
   let conn;
@@ -69,7 +110,7 @@ async function getMoviesByGenre(genreID) {
     // Construct the query dynamically with the correct table name
     const query = `
       SELECT 
-        m.MovieID, m.Title, m.ReleaseDate, m.Description, g.GenreType 
+        m.MovieID, m.Title, m.ReleaseDate, m.Description, g.GenreType , m.movie_picture
       FROM 
         ${table} m
       JOIN 
@@ -81,6 +122,7 @@ async function getMoviesByGenre(genreID) {
     `;
 
     let result;
+    
     if (selectedMember) {
       const selectedMemberArray = Object.values(selectedMember).slice(0, 2);
       console.log(selectedMemberArray + " In model");
@@ -91,7 +133,45 @@ async function getMoviesByGenre(genreID) {
       result = await conn.execute(query, { genreID });
     }
 
-    return result.rows;
+
+    
+    const moviePromises = result.rows.map(async (row) => {
+      const [movieID, title, releaseDate, description, averageRating, moviePicture] = row;
+
+      // Default to null if the moviePicture is not available
+      let imageBase64 = null;
+
+      if (moviePicture && moviePicture.getData) {
+        try {
+          // Retrieve the BLOB data asynchronously
+          const buffer = await new Promise((resolve, reject) => {
+            moviePicture.getData((err, data) => {
+              if (err) reject(err);
+              else resolve(data);
+            });
+          });
+
+          imageBase64 = buffer.toString('base64'); // Convert BLOB to Base64
+        } catch (err) {
+          console.error('Error converting BLOB to Base64:', err);
+        }
+      }
+
+      return {
+        movieID,
+        title,
+        releaseDate,
+        description,
+        averageRating,
+        moviePicture: imageBase64,
+      };
+    });
+
+    // Wait for all movie promises to resolve, including image processing
+    const movies = await Promise.all(moviePromises);
+
+    return movies;
+
   } catch (err) {
     console.error("Error in getMoviesByGenre:", err);
     throw new Error("Failed to fetch movies by genre.");
@@ -128,7 +208,43 @@ async function listMoviesByDecade(decade) {
       result = await conn.execute(query, { startYear, endYear });
     }
 
-    return result.rows;
+    const moviePromises = result.rows.map(async (row) => {
+      const [movieID, title, releaseDate, description, averageRating, moviePicture] = row;
+
+      // Default to null if the moviePicture is not available
+      let imageBase64 = null;
+
+      if (moviePicture && moviePicture.getData) {
+        try {
+          // Retrieve the BLOB data asynchronously
+          const buffer = await new Promise((resolve, reject) => {
+            moviePicture.getData((err, data) => {
+              if (err) reject(err);
+              else resolve(data);
+            });
+          });
+
+          imageBase64 = buffer.toString('base64'); // Convert BLOB to Base64
+        } catch (err) {
+          console.error('Error converting BLOB to Base64:', err);
+        }
+      }
+
+      return {
+        movieID,
+        title,
+        releaseDate,
+        description,
+        averageRating,
+        moviePicture: imageBase64,
+      };
+    });
+
+    // Wait for all movie promises to resolve, including image processing
+    const movies = await Promise.all(moviePromises);
+
+    return movies;
+
   } catch (err) {
     throw err;
   } finally {
@@ -184,7 +300,42 @@ async function getMoviesByName(name) {
     //   return { message: "No movies found for the given name." };
     // }
 
-    return result.rows;  // Return the found movies
+    const moviePromises = result.rows.map(async (row) => {
+      const [movieID, title, releaseDate, description, averageRating, moviePicture] = row;
+
+      // Default to null if the moviePicture is not available
+      let imageBase64 = null;
+
+      if (moviePicture && moviePicture.getData) {
+        try {
+          // Retrieve the BLOB data asynchronously
+          const buffer = await new Promise((resolve, reject) => {
+            moviePicture.getData((err, data) => {
+              if (err) reject(err);
+              else resolve(data);
+            });
+          });
+
+          imageBase64 = buffer.toString('base64'); // Convert BLOB to Base64
+        } catch (err) {
+          console.error('Error converting BLOB to Base64:', err);
+        }
+      }
+
+      return {
+        movieID,
+        title,
+        releaseDate,
+        description,
+        averageRating,
+        moviePicture: imageBase64,
+      };
+    });
+
+    // Wait for all movie promises to resolve, including image processing
+    const movies = await Promise.all(moviePromises);
+
+    return movies;
   } catch (err) {
     console.error('Error in getMoviesByName:', err);
     throw err;  // Propagate error
@@ -238,7 +389,42 @@ async function listMoviesByRatingRange(rating) {
       result = await conn.execute(query, params);
     }
 
-    return result.rows;
+    const moviePromises = result.rows.map(async (row) => {
+      const [movieID, title, releaseDate, description, averageRating, moviePicture] = row;
+
+      // Default to null if the moviePicture is not available
+      let imageBase64 = null;
+
+      if (moviePicture && moviePicture.getData) {
+        try {
+          // Retrieve the BLOB data asynchronously
+          const buffer = await new Promise((resolve, reject) => {
+            moviePicture.getData((err, data) => {
+              if (err) reject(err);
+              else resolve(data);
+            });
+          });
+
+          imageBase64 = buffer.toString('base64'); // Convert BLOB to Base64
+        } catch (err) {
+          console.error('Error converting BLOB to Base64:', err);
+        }
+      }
+
+      return {
+        movieID,
+        title,
+        releaseDate,
+        description,
+        averageRating,
+        moviePicture: imageBase64,
+      };
+    });
+
+    // Wait for all movie promises to resolve, including image processing
+    const movies = await Promise.all(moviePromises);
+
+    return movies;
   } catch (err) {
     console.error('Error fetching movies by rating range:', err.message);
     throw new Error('Error fetching movies by rating range: ' + err.message);

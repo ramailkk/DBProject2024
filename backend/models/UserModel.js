@@ -33,25 +33,21 @@ async function addNewUser(UserData) {
   const username = UserData.username; // Extract username from UserData
   const email = UserData.email; // Extract email from UserData
   const password = UserData.password; // Extract password from UserData
-  const joindate = new Date().toISOString(); // Get the current date in ISO format
+  // const joindate = new Date().toISOString(); // Get the current date in ISO format
+  console.log(username);
 
   let conn;
   try {
-    conn = await oracledb.getConnection({
-      user: 'your_db_user',
-      password: 'your_db_password',
-      connectString: 'your_connection_string',
-    });
+    conn = await oracledb.getConnection();
 
     // Insert the new user into the MOVIEUSER table
     const result = await conn.execute(
       `INSERT INTO MOVIEUSER (USERNAME, EMAIL, PASSWORD, JOINDATE)
-      VALUES (:username, :email, :password, TO_DATE(:joindate, 'YYYY-MM-DD"T"HH24:MI:SS'))`,
+      VALUES (:username, :email, :password, SYSDATE)`,
       { 
         username: username, 
         email: email, 
-        password: password, 
-        joindate: joindate 
+        password: password
       },
       { autoCommit: true } // Commit the transaction automatically
     );

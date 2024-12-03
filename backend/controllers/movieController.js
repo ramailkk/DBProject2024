@@ -5,6 +5,8 @@ const {
   listAllmovies,
   listAllgenres,
   getMoviesByGenre,
+  getUserReviewInfo,
+  getUserListInfo,
   listMoviesByDecade,
   getMoviesByName,
   listMoviesByRatingRange,
@@ -18,6 +20,31 @@ const {
  * @param req - Request object
  * @param res - Response object
  */
+async function fetchUserReviewInfo(req, res) {
+  try {
+    const userID= req.query.id;
+    // get all employees
+  const  user = await getUserReviewInfo(userID);
+    // send response with movies in json
+  res.json({data : user});
+  } catch (err) {
+  res.status(500).json({ message: "Error fetching users", error: err });
+  }
+}
+
+async function fetchUserListInfo(req, res) {
+  try {
+    const userID= req.query.id;
+    const listID = req.query.listID;
+    // get all employees
+  const  user = await getUserListInfo(userID,listID);
+    // send response with movies in json
+  res.json({data : user});
+  } catch (err) {
+  res.status(500).json({ message: "Error fetching users", error: err });
+  }
+}
+
 async function getAllmovies(req, res) {
   try {
     // get all employees
@@ -154,5 +181,7 @@ module.exports = {
   getMoviesByDecade,
   getMoviesByNameHandler,
   getMoviesByRatingRange,
-  updateSelectedMember
+  updateSelectedMember,
+  fetchUserReviewInfo,
+  fetchUserListInfo
   };

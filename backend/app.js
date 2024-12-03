@@ -1,6 +1,6 @@
 const express = require("express");
 
-
+const DashboardRoutes = require("./routes/DashboardRoutes");
 const movieRoutes = require("./routes/movieRoutes");
 const filmpageRoutes = require("./routes/filmpageRoutes");
 const MembersRoutes = require("./routes/MembersRoutes");
@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
-
+app.use("/api", DashboardRoutes);
 app.use("/api", movieRoutes);
 app.use("/api", filmpageRoutes);
 app.use("/api", MembersRoutes)

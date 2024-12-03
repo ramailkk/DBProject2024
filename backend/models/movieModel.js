@@ -261,6 +261,47 @@ async function listMoviesByDecade(decade) {
  * @returns {Promise<Array>} - A promise that resolves to an array of movies.
  */
 
+async function getUserListInfo(userID,listID) {
+  let conn;
+  try {
+    conn = await oracledb.getConnection();
+    const result = await conn.execute(`SELECT u.UserName,l.listname  FROM MovieUser u inner join UserList l on u.UserID = l.UserID where u.UserID =: userID and l.ListID=:listID`, {userID,listID});
+    return result.rows;
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) {
+      await conn.close();
+    }
+  }
+}
+async function getUserReviewInfo(userID) {
+  const query = `SELECT Username FROM MOVIEUSER
+WHERE USERID = :userID`
+  let connection;
+  try {
+    connection = await oracledb.getConnection();
+    const result = await connection.execute(query, [userID]);
+    return result.rows;
+  } finally {
+    if (connection) {
+      await connection.close();
+    }
+  } 
+}
+
+async function getRecentMovies() {
+  const query = `SELECT * from Movie order by ReleaseDate DESC limit 5`
+  let connection;
+  try {
+    connection = await oracledb.getConnection();
+    return result.rows;
+  } finally {
+    if (connection) {
+      await connection.close();
+    }
+  } 
+}
 
 async function getMoviesByName(name) {
   let conn;
@@ -449,6 +490,7 @@ module.exports = {
   listMoviesByRatingRange,
   setSelectedMember,
   with_query,
-  user_table
-
+  user_table,
+  getUserReviewInfo,
+  getUserListInfo
 };

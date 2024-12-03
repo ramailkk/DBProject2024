@@ -1,7 +1,21 @@
 import '../StyleCSS/Dashboard.css';
-
+// import { useSelectedMember } from './SelectedMemberContext.js';
 function Dashboard() {
-
+    // useEffect(() => {
+    //     fetch(`http://localhost:3001/api/recentmovies/`, {
+    //       method: "GET",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     })
+    //       .then((response) => response.json())
+    //       .then((data) => {
+    //         console.log(data.data);
+    //         setFilms(data.data);
+    //       })
+    //       .catch((error) => console.error("Error fetching search results:", error));
+    //   }, [selectedMember]);
+    
     const popularMovies = Array(5).fill(0); // Replace with actual data if available
     const newMovies = Array(5).fill(0); // Replace with actual data if available
     const suggestedMovies = Array(5).fill(0); // Replace with actual data if available

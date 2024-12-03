@@ -2,6 +2,11 @@ const express = require("express");
 const router = express.Router();
 const movieController = require("../controllers/movieController");
 
+
+router.get("/infolist", movieController.fetchUserListInfo);
+//http://localhost:3001/api/infolist?id=3&listID=1
+router.get("/inforeview", movieController.fetchUserReviewInfo);
+//http://localhost:3001/api/InfoReview
 router.get("/movies", movieController.getAllmovies);
 //http://localhost:3001/api/movies
 router.get("/genres", movieController.getAllgenres);

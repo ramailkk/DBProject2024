@@ -196,7 +196,7 @@
         <div className="film-page-outer-container">
           {/* <h2 className="film-page-outer-heading">All Films</h2> */}
           <div className="film-page-context">
-            {renderCurrentUserList(selectedMember)}
+            {RenderCurrentUserList(selectedMember)}
           </div>
           <div className="film-page-container">
             {allfilms}</div>
@@ -205,13 +205,28 @@
     );
   }
 
-  function renderCurrentUserList(selectedMember){
-
+  function RenderCurrentUserList(selectedMember){
+    const [username, setUsername] = useState([])
+    const [listname, setListname] = useState([])
     if (selectedMember !== null){
     const { userId, listId } = selectedMember;
-    
+    fetch(`http://localhost:3001/api/infolist?id=${userId}&listID=${listId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.data); // Assuming data.data is an array of genres
+        console.log(data.data[0][0])
+        setUsername(data.data[0][0])
+        setListname(data.data[0][1])
+      })
+      .catch((error) => console.error("Error fetching genres:", error));
+      console.log(username + '2')
     return(
-  <div className="film-information-page">Insert Name of USERID  {userId} AND ListName of listID {listId} </div>
+  <div className="film-information-page-user-heading">These is {username}'s {listname} Collection</div>
     )
   }
   }

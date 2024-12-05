@@ -3,32 +3,11 @@ import { useSelectedMember } from './SelectedMemberContext.js';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState , useEffect } from "react";
-const popularMovies = Array(4).fill(0); // Replace with actual data if available
-const newMovies = Array(4).fill(0); // Replace with actual data if available
-import { useFilm } from './FilmContext.js' ;
-
-function getgridMovies(array) {
-    return array.map((_, index) => (
-        <div key={index} className="member-information-grid__element">Movie {index + 1}</div>
-    ));
-}
-
-const recentReviews = Array(3).fill("");
-// index.picture
-// index.description
-// index.review
-
-function getrecentReviews(array) {
-    return array.map((_, index) => (
-        <div key={index} className="member-information-review__element">
-        <div className="member-information-review-poster"></div>
-        {/* <div className="rev rating">4/5</div> */}
-        <div className="member-information-review-comment">This movie sucks big dodo ass like holy shit</div>
-    </div>
-    ));
-}
-
-
+import { useFilm } from './FilmContext.js';
+import eyeImage from "../Styleicons/eye2.png";
+import listImage from "../Styleicons/windows.png";
+import reviewImage from "../Styleicons/review.png";
+import sampleAvatar from "../Styleicons/avatar.png";
 
 function Memberonly(){
 
@@ -39,8 +18,29 @@ function Memberonly(){
     const navigate = useNavigate();
 
 
-    
+    function getgridMovies(array) {
+      console.log(array);
+      return array?.map((item, index) => (
+          <Link
+              to={`/filmonly`}
+              key={item.movieID}
+              onClick={() => setSelectedFilm(item)}
+              className="member-information-grid__element"
+              style={{
+                backgroundImage: `url(data:image/jpeg;base64,${item.moviePicture})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                height: '300px',  // Adjust height as needed
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'flex-end',
+                textDecoration: 'none',
+              }}
+            ></Link>
+      ));
+  }
   
+    
     const handleSelectMemberLists = (userId,listId,event) => {
         event.preventDefault();
         setSelectedMember({ userId, listId });
@@ -75,50 +75,55 @@ function Memberonly(){
         
       useEffect(() => {
         fetchMemberDetails("http://localhost:3001/api/singlemember", `?id=${selectedMember?.userId}`, setCurrent_Member);
+        type_Movies(`userrecentmovies?id=${selectedMember?.userId}`,setRecent_movies);
+        type_Movies(`userfavmovies?id=${selectedMember?.userId}`,setFavourite_movies);
       }, []);
 
 
+    const [recent_movies, setRecent_movies] = useState([]);
+    const [favourite_movies,setFavourite_movies] = useState([]);
 
-      useEffect(() => {
-        fetch(`http://localhost:3001/api/movies/`, {
-          method: "GET",
-          headers: {
+    function type_Movies(api,setArray){
+        fetch(`http://localhost:3001/api/${api}`, {
+            method: "GET",
+            headers: {
             "Content-Type": "application/json",
-          },
+            },
         })
-          .then((response) => response.json())
-          .then((data) => {
+            .then((response) => response.json())
+            .then((data) => {
             console.log(data.data);
-            setFilms(data.data);
-          })
-          .catch((error) => console.error("Error fetching search results:", error));
-      }, [selectedMember]);
+            setArray(data.data);
+            })
+            .catch((error) => console.error("Error fetching search results:", error));
+    }
 
-      const filmer = (category) => {
-        const allfilms = category?.map((item, index) => (
-            <Link 
-              to={`/filmonly`} 
-              key={item.movieID} 
-              onClick={() => setSelectedFilm(item)} 
-              className="film-page__child"
-              style={{
-                backgroundImage: `url(data:image/jpeg;base64,${item.moviePicture})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                height: '300px',  // Adjust height as needed
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'flex-end',
-                textDecoration: 'none'
-              }}
-            >
-              <div className="film-card__info">
-                <h3>{item.title}</h3>
-                <p>{new Date(item.releaseDate).getFullYear()}</p>
-                <p>{item.averageRating}</p>
-              </div>
-            </Link>
-          ));
+
+    function generateFilmLinks(films, setSelectedFilm) {
+        return films?.map((item) => (
+          <Link
+            to={`/filmonly`}
+            key={item.movieID}
+            onClick={() => setSelectedFilm(item)}
+            className="film-page__child"
+            style={{
+              backgroundImage: `url(data:image/jpeg;base64,${item.moviePicture})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              // height: '300px',  // Adjust height as needed
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'flex-end',
+              textDecoration: 'none',
+            }}
+          >
+            <div className="film-card__info">
+              <h3>{item.title}</h3>
+              <p>{new Date(item.releaseDate).getFullYear()}</p>
+              <p>{item.averageRating}</p>
+            </div>
+          </Link>
+        ));
       }
       
     return(
@@ -127,17 +132,27 @@ function Memberonly(){
 
 <div className="member-information-userbox">
     <div className="member-information-userbox-left">
-        <div className="member-information-profile single-member-picture"></div>
+
+    <img  src={sampleAvatar} className="member-information-profile single-member-picture" alt="Avatar"/>
+
         <div className="member-information-profile single-member-name">
             {current_member[0] ? current_member[0][0] : "Loading..."}
         </div>
     </div>
     <div className="member-information-userbox-right">
         <div className="member-information-profile single-member-watchedcount">
-            {current_member[0] ? current_member[0][1] : "Loading..."}
+        <div className="members-page-profile-flex__image">
+            <img src={eyeImage} alt="eyeImage" />
+          </div>
+          <div className="members-page-profile-flex__content">{current_member[0] ? current_member[0][2] : "Loading..."}</div>
+
+
         </div>
         <div className="member-information-profile single-member-reviewcount">
-            {current_member[0] ? current_member[0][2] : "Loading..."}
+        <div className="members-page-profile-flex__image">
+            <img src={reviewImage} alt="Review" />
+          </div>
+          <div className="members-page-profile-flex__content">{current_member[0] ? current_member[0][1] : "Loading..."}</div>  
         </div>
     </div>
 </div>
@@ -152,8 +167,6 @@ function Memberonly(){
     </div>
 
 
-    {/* two-structure-row-flex which seperates movies and reviews of a user */}
-    <div className="member-information-two-structure-row-flex">
 
 
     {/*left side of the flex: movie-portion */}
@@ -163,20 +176,15 @@ function Memberonly(){
     {/* Favourite movies of a user */}
     <h1 className='member-information-left-side__heading'>Favourites</h1>
     <hr className="member-information-left-side__headingline"></hr>
-    <div className='member-information-left-side__grid single-popular-grid'>{filmer()}</div>
+    <div className='member-information-left-side__grid single-popular-grid'>{getgridMovies(favourite_movies)}</div>
 
     {/* Recent movies of a user */}
     <h1 className='member-information-left-side__heading'>Recently Watched</h1>
     <hr className="member-information-left-side__headingline"></hr>
-    <div className='member-information-left-side__grid single-recent-grid'>{getgridMovies(newMovies)}</div>
+    <div className='member-information-left-side__grid single-recent-grid'>{getgridMovies(recent_movies)}</div>
     
     </div>
 
-    {/* right side of the flex: review-portion */}
-    <div className="member-information-review-container">
-        {getrecentReviews(recentReviews)}
-    </div>
-    </div>
 
     </div>   
     )

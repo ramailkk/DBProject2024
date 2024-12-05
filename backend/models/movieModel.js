@@ -11,7 +11,7 @@ var with_query = ` WITH userTable AS (
     `;
 // Function to update the selectedMember (called by the controller)
 const setSelectedMember = (member) => {
-  selectedMember = member;
+  selectedMember = member;  
 };
 async function listAllmovies() {
   let conn;

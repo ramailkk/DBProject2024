@@ -2,35 +2,38 @@ import { useState , useEffect, useRef} from 'react';
 import '../StyleCSS/Filmonly.css'
 import { useParams } from 'react-router-dom';
 import { useFilm } from './FilmContext.js';
-
+import {useAuth} from './AuthContext.js';
 
 
 function Filmonly(){ 
 
-    // Inside the function component
-const isMounted = useRef(true); // Flag to track mount status
+//     // Inside the function component
+// const isMounted = useRef(true); // Flag to track mount status
 
-useEffect(() => {
-  return () => {
-    isMounted.current = false; // Set to false when the component unmounts
-  };
-}, []);
+// useEffect(() => {
+//   return () => {
+//     isMounted.current = false; // Set to false when the component unmounts
+//   };
+// }, []);
 
 
     const {selectedFilm} = useFilm();
 
     const [choice_desc, setChoice_desc] = useState('actors');
 
-
+    const { user } = useAuth();
 
 
     const [genres,setGenres] = useState([]);
     const [actors, setActors] = useState([]);
     const [directors, setDirectors] = useState([]);
-    
+
+    useEffect(() => {
     fetchDescriptionOption('http://localhost:3001/api/filmpagegenres?', `id=${selectedFilm.movieID}`, setGenres)
     fetchDescriptionOption('http://localhost:3001/api/filmpageactors?', `id=${selectedFilm.movieID}`, setActors)
     fetchDescriptionOption('http://localhost:3001/api/filmpagedirectors?', `id=${selectedFilm.movieID}`, setDirectors)
+    },[])
+
     const arrays = {
         directors,
         actors,
@@ -102,7 +105,7 @@ useEffect(() => {
 
             <div className='film-information-right-flex'>
                 <div className='film-information__element film-information__log-options'>
-                    {renderLogOptions("login")}
+                    {renderLogOptions(user)}
                 </div>
 
                 <div className='film-information__element film-information__ratings'>
@@ -128,15 +131,16 @@ function currentDesc(arrays,choice_desc){
     // login
     // logging
     // logout
-function renderLogOptions(currentLogStatus){
-    if(currentLogStatus === 'logout'){
+function renderLogOptions(user){
+    console.log(user.id)
+    if(!user.id){
         return(
     <div className='film-information__element film-information-log-options__logout '>
         Sign in to log, rate or review
     </div>
         )
     }
-    else if(currentLogStatus === 'login'){
+    else {
         return(
             <div className='film-information__element film-information-log-options__login'>
                     <div className='film-information-login__element film-information-login-watched'>Add to Watched</div>

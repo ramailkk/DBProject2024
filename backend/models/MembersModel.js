@@ -1,17 +1,120 @@
 const oracledb = require("oracledb");
 
-async function listfavmovies(userID){
+async function listfavmovies(userID) {
+    let conn;
+    try {
+        conn = await oracledb.getConnection();
+        const query = `SELECT M.* FROM MOVIE M
+                       INNER JOIN LISTMOVIES L
+                       ON M.MOVIEID = L.MOVIEID
+                       WHERE LISTID = 2 AND USERID = :userID
+                       FETCH FIRST 4 ROWS ONLY`;
+        const result = await conn.execute(query, [userID]);
+        // Ensure that result.rows is not null or empty
+    // if (!result.rows || result.rows.length === 0) {
+    //   return { message: "No movies found for the given name." };
+    // }
+
+    const moviePromises = result.rows.map(async (row) => {
+        const [movieID, title, releaseDate, description, averageRating, moviePicture] = row;
+  
+        // Default to null if the moviePicture is not available
+        let imageBase64 = null;
+  
+        if (moviePicture && moviePicture.getData) {
+          try {
+            // Retrieve the BLOB data asynchronously
+            const buffer = await new Promise((resolve, reject) => {
+              moviePicture.getData((err, data) => {
+                if (err) reject(err);
+                else resolve(data);
+              });
+            });
+  
+            imageBase64 = buffer.toString('base64'); // Convert BLOB to Base64
+          } catch (err) {
+            console.error('Error converting BLOB to Base64:', err);
+          }
+        }
+  
+        return {
+          movieID,
+          title,
+          releaseDate,
+          description,
+          averageRating,
+          moviePicture: imageBase64,
+        };
+      });
+  
+      // Wait for all movie promises to resolve, including image processing
+      const movies = await Promise.all(moviePromises);
+  
+      return movies;
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) {
+            await conn.close();
+        }
+    }
+}
+async function listrecentmovies(userID){
     let conn;
     try {
     conn = await oracledb.getConnection();
-    const query = `SELECT M.* FROM MOVIE M
+    const query = `
+
+SELECT M.*
+FROM MOVIE M
 INNER JOIN LISTMOVIES L
 ON M.MOVIEID = L.MOVIEID
-WHERE LISTID = 2 AND USERID = :userID
+WHERE L.USERID = :userID AND L.LISTID = 1 
+ORDER BY M.releaseDate DESC
 FETCH FIRST 4 ROWS ONLY`
 
     const result = await conn.execute(query ,[userID]);
-    return result.rows;
+    // Ensure that result.rows is not null or empty
+    // if (!result.rows || result.rows.length === 0) {
+    //   return { message: "No movies found for the given name." };
+    // }
+
+    const moviePromises = result.rows.map(async (row) => {
+        const [movieID, title, releaseDate, description, averageRating, moviePicture] = row;
+  
+        // Default to null if the moviePicture is not available
+        let imageBase64 = null;
+  
+        if (moviePicture && moviePicture.getData) {
+          try {
+            // Retrieve the BLOB data asynchronously
+            const buffer = await new Promise((resolve, reject) => {
+              moviePicture.getData((err, data) => {
+                if (err) reject(err);
+                else resolve(data);
+              });
+            });
+  
+            imageBase64 = buffer.toString('base64'); // Convert BLOB to Base64
+          } catch (err) {
+            console.error('Error converting BLOB to Base64:', err);
+          }
+        }
+  
+        return {
+          movieID,
+          title,
+          releaseDate,
+          description,
+          averageRating,
+          moviePicture: imageBase64,
+        };
+      });
+  
+      // Wait for all movie promises to resolve, including image processing
+      const movies = await Promise.all(moviePromises);
+  
+      return movies;
     } catch (err) {
     throw err;
     } finally {
@@ -21,21 +124,6 @@ FETCH FIRST 4 ROWS ONLY`
     }
 }
 
-async function listbyrev(userid){
-    let conn;
-    try {
-    conn = await oracledb.getConnection();
-    const query = 'Select * from movie m inner join reviews r on r.movieID = m.movieID inner join movieuser mu on mu.userID = r.userID where mu.userID = :userid order by r.ReviewDate desc limit 3';
-    const result = await conn.execute(query);
-    return result.rows;
-    } catch (err) {
-    throw err;
-    } finally {
-    if (conn) {
-        await conn.close();
-    }   
-    }
-}
 
 async function List_Row_Members() {
     let conn;
@@ -82,7 +170,7 @@ async function List_Single_Member(userID) {
     try {
     conn = await oracledb.getConnection();
     const query = 
-    `    WITH
+    `WITH
     USER_REVIEWS AS (
         SELECT 
             U.USERID, 
@@ -90,7 +178,7 @@ async function List_Single_Member(userID) {
             COALESCE(COUNT(R.USERID), 0) AS REVIEWS_FOR_ONE
         FROM MOVIEUSER U
         LEFT JOIN REVIEWS R ON R.USERID = U.USERID
-        WHERE U.USERID = 83
+        WHERE U.USERID = :userID
         GROUP BY U.USERID, U.USERNAME
     ),
     USER_FILMS AS (
@@ -100,7 +188,7 @@ async function List_Single_Member(userID) {
             COALESCE(COUNT(LM.USERID), 0) AS FILMS_FOR_ONE
         FROM MOVIEUSER U
         LEFT JOIN LISTMOVIES LM ON LM.USERID = U.USERID
-        WHERE U.USERID = 83 AND LM.LISTID = 1 
+        WHERE U.USERID = :userID AND LM.LISTID = 1 
         GROUP BY U.USERID, U.USERNAME
     )
     SELECT 
@@ -109,7 +197,6 @@ async function List_Single_Member(userID) {
         COALESCE(F.FILMS_FOR_ONE, 0) AS FILMS_FOR_ONE
     FROM USER_REVIEWS R
     LEFT JOIN USER_FILMS F ON R.USERID = F.USERID
-
     `;
 const result = await conn.execute(query, {userID});
     return result.rows;
@@ -127,5 +214,5 @@ module.exports = {
    List_Row_Members,
    List_Single_Member,
    listfavmovies,
-   listbyrev
+   listrecentmovies
 };     

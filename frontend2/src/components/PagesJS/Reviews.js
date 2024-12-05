@@ -108,10 +108,26 @@ function Reviews() {
     ));
   }
 
+  const [username, setUsername] = useState([]);
+  const { userId, listId } = selectedMember;
+    fetch(`http://localhost:3001/api/inforeview?id=${userId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.data); // Assuming data.data is an array of genres
+        console.log(data.data[0][0])
+        setUsername(data.data[0][0])
+      })
+      .catch((error) => console.error("Error fetching genres:", error));
+
   return (  
     <div className="review-page">
       <div className="review-page-container">
-        <div className="review-page-heading">Reviews of Insert name of User ID {selectedMember.userId}</div>
+        <div className="review-page-heading">Reviews of {username}</div>
 
         <form className="review-page-criteria-selectorbox">
           <div className="review-page-criteria-selectorbox__element">

@@ -5,7 +5,7 @@ const {
   List_Row_Members,
   List_Single_Member,
   listfavmovies,
-  listbyrev
+  listrecentmovies
 } = require("../models/MembersModel");
 
   // const db = require("../config/db");
@@ -39,12 +39,29 @@ async function fetchSingleMember(req, res) {
 
 async function fetchfavmovies(req, res) {
   try {
+      // Get user ID from query params
+      const userID = req.query.id; // Ensure it's 'userID' not 'userid'
+      
+      if (!userID) {
+          return res.status(400).json({ message: "User ID is required" });
+      }
+      
+      const members = await listfavmovies(userID);
+      
+      // Send response with movies in JSON format
+      res.json({ data: members });
+  } catch (err) {
+      res.status(500).json({ message: "Error fetching members", error: err });
+  }
+}
+async function fetchrecentmovies(req, res) {
+  try {
     // get all employees
     const userID = req.query.id; // Fetch genre ID from query params
-    if (!userid) {
+    if (!userID) {
       return res.status(400).json({ message: "user ID is required" });
     }
-  const  members = await listfavmovies(userID);
+  const  members = await listrecentmovies(userID);
     // send response with movies in json
   res.json({ data: members });
   } catch (err) {
@@ -72,5 +89,5 @@ module.exports = {
   fetchRowMember,
   fetchfavmovies,
   fetchSingleMember,
-  fetchbyrev
+  fetchrecentmovies
  };

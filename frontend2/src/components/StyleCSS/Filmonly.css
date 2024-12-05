@@ -6,19 +6,12 @@
 
 .film-information-container {
     position: relative;
-    max-width: 1200px; /* Adjusted for a more standard container size */
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 20px; /* Added padding for spacing inside the container */
+    padding: 20px;
 }
 
-.film-information__element {
-    display: inline-block;
-    border: 1px solid white;
-    flex-shrink: 0;
-    flex-grow: 0;
-    padding: 10px; /* Added spacing for better separation */
-}
-
+/* Title Section */
 .film-information-title {
     position: relative;
     left: 50%;
@@ -27,140 +20,123 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 15px; /* Increased gap for better readability */
+    gap: 15px;
 }
 
 .film-information-title__element {
-    font-size: 1.8rem; /* Slightly larger for better visibility */
+    font-size: 1.8rem;
+    color: #ffffff;
 }
 
 .title-name {
     font-size: 2.5rem;
-    font-weight: bold; /* Added weight for emphasis */
+    font-weight: bold;
+    /* color: #ffcc00; */
+    text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.6);
 }
 
 .title-year,
 .title-director {
     text-decoration: underline;
-    font-size: 1.2rem; /* Added size for better legibility */
+    font-size: 1.2rem;
+    color: #ddd;
 }
 
+/* Image Section */
 .film-information-picture {
-    width: 300px; /* Slightly larger for better visual impact */
-    height: 400px; /* Adjusted proportionally */
-    object-fit: cover; /* Ensures the image looks good */
-    border-radius: 5px;
+    width: 300px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
 
+/* Description Section */
 .film-information-description {
-    height: 250px; /* Slightly increased for better readability */
+    height: 250px;
     padding: 10px;
     font-size: 1rem;
     line-height: 1.5;
-    overflow-y: auto; /* Ensures scrolling for long descriptions */
+    color: #eee;
+    background: linear-gradient(145deg, #2a2a2a, #333333);
+    border-radius: 8px;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
 }
 
+/* Flex Containers */
 .film-information-three-row-structure-flex {
     display: flex;
     flex-direction: row;
-    justify-content: space-between; /* Adjusted for equal spacing */
+    justify-content: space-between;
     align-items: start;
     margin-top: 40px;
-    gap: 20px; /* Added consistent gap */
+    gap: 20px;
 }
 
-.film-information__ratings {
-    text-align: center;
-    height: 80px; /* Increased height for better alignment */
-    font-size: 1.2rem;
-    line-height: 2rem;
-    padding: 5px;
-    /* border: 1px solid gray; Added border for clarity */
-}
-
-.film-information-left-flex {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* Added gap for spacing */
-}
-
-.film-information-left-bottom-flex {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between; /* Better alignment for children */
-    gap: 10px;
-}
-
-.film-information-middle-flex {
+.film-information-left-flex,
+.film-information-middle-flex,
+.film-information-right-flex {
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-.film-information-bottom-desc-flex {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 20px; /* Added spacing from above */
-    padding: 10px; /* Added padding for better spacing */
-}
-
-.bottom-desc__element {
-    cursor: pointer;
-    user-select: none;
+/* Ratings Section */
+.film-information__ratings {
+    text-align: center;
+    height: 80px;
+    font-size: 1.2rem;
+    line-height: 2rem;
     padding: 5px;
-    font-size: 1rem; /* Standardized font size */
-    transition: background-color 0.3s ease-in-out; /* Added hover effect */
+    background: linear-gradient(145deg, #444, #555);
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.bottom-desc__element:hover {
-    background-color: #ddd;
-}
-
-.choice-desc {
-    width: 450px; /* Adjusted size for balance */
-    padding: 10px;
-}
-
+/* Categories Section */
 .film-information-desc-category {
-    width: 100%; /* Full width for flexibility */
+    width: 100%;
     text-transform: capitalize;
-    display: grid; /* Applying grid layout */
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Automatically adjusts columns based on content */
-    gap: 20px; /* Space between the grid items */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 20px;
     padding: 10px;
-    padding: 10px; /* Added padding for spacing */
 }
 
 .film-information-desc-category__child {
-    padding: 5px;
+    padding: 10px;
     font-size: 1rem;
     text-align: center;
-    min-width: 80px; /* Added minimum size for consistency */
-    flex-grow: 1; /* Ensures equal distribution */
-    /* border: 1px solid #ccc; Border added for better visibility */
-    margin: 5px; /* Space between items */
-    transition: background-color 0.3s ease-in-out; /* Added hover effect */
+    min-width: 80px;
+    color: #fff;
+    background: linear-gradient(145deg, #333, #444);
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
 .film-information-desc-category__child:hover {
-    background-color: #ddd; /* Hover effect */
+    background-color: #555;
+    transform: scale(1.05);
 }
 
-.film-information-right-flex {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 10px;
-}
-
+/* Log Options Section */
 .film-information__log-options {
     width: 300px;
-    height: 250px; /* Increased height for better space allocation */
-    background-color: #2a2a2a; /* Dark background to match the overall theme */
-    border-radius: 10px; /* Smooth corners for a modern look */
-    padding: 20px; /* Padding for spacing inside the container */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Added subtle shadow for emphasis */
+    height: 250px;
+    background: linear-gradient(145deg, #2a2a2a, #333333);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+   
+}
+.film-information-log-options__login{
+    display: flex;
+    flex-direction: column; 
+    gap: 30px;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .film-information-log-options__logout {
@@ -168,40 +144,66 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    background-color: #ff4d4d; /* Red for logout to stand out */
-    color: white; /* White text for contrast */
+    background-color: #ff4d4d;
+    color: white;
     padding: 0.8rem 1.5rem;
     font-size: 1.2rem;
     font-weight: bold;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .film-information-log-options__logout:hover {
-    background-color: #e60000; /* Darker red on hover */
-}
-
-.film-information-log-options__login {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
+    background-color: #e60000;
+    transform: scale(1.1);
 }
 
 .film-information-login__element {
-    background-color: #333; /* Green for login to match the positive action theme */
+    background-color: #444;
     color: white;
     width: 80%;
     text-align: center;
-    /* padding: 0.8rem; */
     font-size: 1.2rem;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
 .film-information-login__element:hover {
-    background-color: #45a049; /* Darker green on hover */
+    background-color: #45a049;
+    transform: scale(1.1);
+}
+
+.film-information-bottom-desc-flex{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+.bottom-desc__element {
+    cursor: pointer;
+    user-select: none;
+    padding: 8px 16px; /* Compact padding */
+    font-size: 0.9rem; /* Slightly smaller font for subtlety */
+    font-weight: bold; /* Bold text for emphasis */
+    color: white; /* Contrasting text color */
+    background: linear-gradient(45deg, #2c2c54, #24243e); /* Darker gradient */
+    border: none; /* Remove any border */
+    border-radius: 6px; /* Slightly rounded corners */
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transitions */
+    width: auto; /* Keeps width compact and adjusts to content */
+    text-align: center; /* Centers the text inside the button */
+}
+
+.bottom-desc__element:hover {
+    transform: translateY(-2px); /* Subtle lift effect */
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
+    background: linear-gradient(45deg, #3b3b68, #34344c); /* Slightly lighter gradient */
+}
+
+.bottom-desc__element:active {
+    transform: translateY(1px); /* Slight press effect */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Reduced shadow for active state */
 }

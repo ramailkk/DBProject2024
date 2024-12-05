@@ -14,7 +14,7 @@ body {
 .film-page-outer-container {
   width: 90%;
   max-width: 1200px;
-  margin: 2rem auto;
+  margin: 0rem auto;
   padding: 2rem;
   border-radius: 12px;
   text-align: center;
@@ -86,6 +86,8 @@ body {
   justify-content: center;
   margin-top: 2rem;
   gap: 10px;
+  /* border: 2px solid red ; */
+
 }
 
 .film-page-criteria-selectorbox__element {
@@ -164,4 +166,9 @@ body {
 .film-page-search-bar:focus {
   outline: none;
   border: 1px solid #aaa;
+}
+.film-information-page-user-heading{
+  font-size: 1.5rem;
+  text-shadow: #aaa;
+  /* border: 2px solid red; */
 }

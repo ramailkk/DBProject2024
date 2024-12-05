@@ -1,7 +1,8 @@
 import React, { createContext, useState, useContext } from 'react';
-
+import { Outlet, Link, Navigate, useNavigate } from "react-router-dom";
 // Create Context
 const AuthContext = createContext();
+
 
 // AuthProvider component to wrap around your app and provide context
 export const AuthProvider = ({ children }) => {
@@ -14,6 +15,7 @@ export const AuthProvider = ({ children }) => {
     joinDate: ''
   });
 
+  const navigate = useNavigate();
   // Function to set the user data after a successful login
   const login = (userData) => {
     // Assuming userData is an array or object with values [id, username, email, password, joinDate]
@@ -24,6 +26,7 @@ export const AuthProvider = ({ children }) => {
       password: userData[0][3],    // password
       joinDate: userData[0][4],    // join date
     });
+    navigate('/');
   };
 
   // Function to log out the user
@@ -35,6 +38,7 @@ export const AuthProvider = ({ children }) => {
       password: '',
       joinDate: ''
     });
+    navigate('/');
   };
 
   return (

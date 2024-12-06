@@ -131,7 +131,7 @@ function LogOut(setTab) {
     <div className="header-links">
       <Link to="/films" className="headerboxcomponent">Films</Link>
       <Link to="/members" className="headerboxcomponent">Members</Link>
-      <div className="headerboxcomponent" onClick={() => handlelogout(setTab)} >Login</div>
+      <div className="headerboxcomponent" onClick={() => handlelogout(setTab)}>Login</div>
       <Link to="/signup" className="headerboxcomponent">Signup</Link>
     </div>
   );
@@ -145,10 +145,11 @@ function LogIn(setTab) {
 
 const { setSelectedMember } = useSelectedMember();
 const { user } = useAuth();  // Get the login function from context
-
+const {logout} = useAuth();
 const handleSelectMemberOnly = (userId) => {
   setSelectedMember({ userId }); // Set the userId in the context as an object
   console.log(userId);
+  
 };
   return (
     
@@ -158,9 +159,15 @@ const handleSelectMemberOnly = (userId) => {
           </Link>
       <Link to="/films" className="headerboxcomponent">Films</Link>
       <Link to="/members" className="headerboxcomponent">Members</Link>
-      <div className="headerboxcomponent" onClick={() => setTab("logout")}>Logout</div>
+      <div className="headerboxcomponent" onClick={() => handlecompeletelogout(setTab)}>Logout</div>
     </div>
   );
+  function handlecompeletelogout(setTab){
+    logout()
+    setTab("logout")
+  }
+  
 }
+
 
 export default Headerbox;
